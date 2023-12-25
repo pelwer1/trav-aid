@@ -58,9 +58,10 @@ on('ready', () => {
             let cmd_args = [];
             cmd_args = args[0].split(/\s+/);
             cmd_args.shift(); // drop switch name
-            let cmd_uwp = cmd_args; // get switch value
+            let cmd_uwp = cmd_args[0]; // get switch value
 
             // parse uwp
+			// let letter = text.charAt(1);
 			let stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
 			let siz = ts_hexToNum(cmd_uwp.charAt(1));
 			let atm = ts_hexToNum(cmd_uwp.charAt(2));
@@ -176,7 +177,7 @@ on('ready', () => {
 				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx2 
 				DM_black_market_military      = -1 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
 				DM_black_market_prohibited    = -6 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx20
-				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + 'NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
+				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
 			}
 
 		} // end if trav_shop
@@ -185,3 +186,23 @@ on('ready', () => {
 }); // end on ready
 
 ;
+/*
+  Fist: B789430-C  Ni Ht
+  if last line is same as current line => extend TL entry into a range.
+"-=> trav_shop: item TL: 0 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 1 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 2 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 3 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 4 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 5 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 6 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 7 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 8 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL: 9 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL:10 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL:11 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL:12 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
+"-=> trav_shop: item TL:13 NM Civ Crx1:-3 NM Mil Crx3:-5 BM Civ Crx2:1 BM Mil Crx5:-2 BM Prohib Crx20:-7 <=-"
+"-=> trav_shop: item TL:14 NM Civ Crx1:-3 NM Mil Crx3:-5 BM Civ Crx2:1 BM Mil Crx5:-2 BM Prohib Crx20:-7 <=-"
+"-=> trav_shop: item TL:15 NM Civ Crx1:-4 NM Mil Crx3:-6 BM Civ Crx2:0 BM Mil Crx5:-3 BM Prohib Crx20:-8 <=-"
+*/
