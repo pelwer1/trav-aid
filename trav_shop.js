@@ -1,6 +1,6 @@
 /* Traveller RPG Shopping DMs - based on Mongoose Traveller 2e - Central Supply Catalog Availability rules */
 
-/* libraries and base code lifted from the great work by forthekill at: https://github.com/forthekill/travGenJS */
+/*  libraries and base code lifted from the great work by forthekill at: https://github.com/forthekill/travGenJS */
 
 
 //
