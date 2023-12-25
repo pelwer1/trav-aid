@@ -1,10 +1,8 @@
-/* Traveller RPG Shopping DMs - based on Mongoose Traveller 2e - Central Supply Catalog Availability rules */
-
-/*  libraries and base code lifted from the great work by forthekill at: https://github.com/forthekill/travGenJS */
-
-
+// Traveller RPG Shopping DMs - based on Mongoose Traveller 2e - Central Supply Catalog Availability rules 
 //
-// Usage: !trav-shop --uwp B789430-C --tc Ni Ht
+//  libraries and base code lifted from the great work by forthekill at: https://github.com/forthekill/travGenJS 
+//
+// Usage: !trav-shop --uwp B789430-C
 //
 // Fist: B789430-C  Ni Ht
 //
@@ -49,53 +47,49 @@ on('ready', () => {
                 return;
             }
 
-            // After shiftign out the api call args array should be
+            // After shifting out the api call args array should be
             // [0] uwp B789430-C
-            // [1] tc Ni Ht
-            if (!(args[0] && args[1])) {
-                sendChat("trav-shop", "\nUsage: !trav-shop --uwp B789430-C --tc Ni Ht (system uwp, trade codes)");
+            if (!(args[0])) {
+                sendChat("trav-shop", "\nUsage: !trav-shop --uwp B789430-C  (system uwp code)");
                 return;
             }
            
             // parse cmd line args
-            let cmd_args = []
+            let cmd_args = [];
             cmd_args = args[0].split(/\s+/);
             cmd_args.shift(); // drop switch name
             let cmd_uwp = cmd_args; // get switch value
-            cmd_args = args[1].split(/\s+/);
-            cmd_args.shift();
-            let cmd_trade = cmd_args.join(' '); // system may have multiple trade codes
 
             // parse uwp
-			stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
-			siz = ts_hexToNum(cmd_uwp.charAt(1));
-  	      	atm = ts_hexToNum(cmd_uwp.charAt(2));
-  	      	hyd = ts_hexToNum(cmd_uwp.charAt(3));
-  	      	pop = ts_hexToNum(cmd_uwp.charAt(4));
-			gov = ts_hexToNum(cmd_uwp.charAt(5));
-			law = ts_hexToNum(cmd_uwp.charAt(6)); // Affects Availability (Black Market)
-  	      	tl  = ts_hexToNum(cmd_uwp.charAt(8)); // Affects Availability
+			let stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
+			let siz = ts_hexToNum(cmd_uwp.charAt(1));
+			let atm = ts_hexToNum(cmd_uwp.charAt(2));
+			let hyd = ts_hexToNum(cmd_uwp.charAt(3));
+  	      	let pop = ts_hexToNum(cmd_uwp.charAt(4));
+			let gov = ts_hexToNum(cmd_uwp.charAt(5));
+			let law = ts_hexToNum(cmd_uwp.charAt(6)); // Affects Availability (Black Market)
+			let tl  = ts_hexToNum(cmd_uwp.charAt(8)); // Affects Availability
   
         	  // config trade code variables
-          	tc_ag = false; //x Agricultural Atm 4-9, Hyg 4-8, Pop 5-7
-          	tc_as = false; //x Asteroid Belt Siz & Atm & Hyd 0
-          	tc_ba = false; //x Barren Pop & Gov & Law(PGL) 0
-          	tc_de = false; //x Desert Atm 2-9, Hyd 0
-          	tc_fl = false; //x Fluid Oceans (something other than water) Atm 10+, Hyd 1+
-          	tc_ga = false; //x Garden World Siz 6-8, Atm 5,6,8, Hyd 5-7
-          	tc_he = false; //x Hell World Siz 3+, Atm 2,4,7,9-C, Hyd 0-2
-          	tc_hi = false; //x High Population // Affects Availability Pop 9+
-          	tc_ht = false; //x High Tech // Affects Availability TL 12+
-          	tc_ic = false; //x Ice Capped Atm 0-1, Hyd 1+
-          	tc_in = false; //x Industrialized // Affects Availability Atm 0,1,2,4,7,9-C, Pop 9+
-          	tc_lo = false; //x Low Population  Pop 1-3
-          	tc_lt = false; //x Low Tech // Affects Availability  TL 5-
-          	tc_na = false; //x Non-Agricultural // Affects Availability Atm 3-, Hyd 3-, Pop 6+
-          	tc_ni = false; //x Non-Industrial // Affects Availability Pop 4-6
-          	tc_po = false; //x Poor // Affects Availability Atm 2-5, Hyd 3-
-          	tc_ri = false; //x Rich  // Affects Availability Atm 6,8, Pop 6-8 Gov 4-9
-          	tc_va = false; //x Vacuum World (no atmosphere)  Atm 0
-          	tc_wa = false; //x Water World  Siz 3-9, Atm 3-9, Hyd A
+          	let tc_ag = false; //x Agricultural Atm 4-9, Hyg 4-8, Pop 5-7
+          	let tc_as = false; //x Asteroid Belt Siz & Atm & Hyd 0
+          	let tc_ba = false; //x Barren Pop & Gov & Law(PGL) 0
+          	let tc_de = false; //x Desert Atm 2-9, Hyd 0
+          	let tc_fl = false; //x Fluid Oceans (something other than water) Atm 10+, Hyd 1+
+          	let tc_ga = false; //x Garden World Siz 6-8, Atm 5,6,8, Hyd 5-7
+          	let tc_he = false; //x Hell World Siz 3+, Atm 2,4,7,9-C, Hyd 0-2
+          	let tc_hi = false; //x High Population // Affects Availability Pop 9+
+          	let tc_ht = false; //x High Tech // Affects Availability TL 12+
+          	let tc_ic = false; //x Ice Capped Atm 0-1, Hyd 1+
+          	let tc_in = false; //x Industrialized // Affects Availability Atm 0,1,2,4,7,9-C, Pop 9+
+          	let tc_lo = false; //x Low Population  Pop 1-3
+          	let tc_lt = false; //x Low Tech // Affects Availability  TL 5-
+          	let tc_na = false; //x Non-Agricultural // Affects Availability Atm 3-, Hyd 3-, Pop 6+
+          	let tc_ni = false; //x Non-Industrial // Affects Availability Pop 4-6
+          	let tc_po = false; //x Poor // Affects Availability Atm 2-5, Hyd 3-
+          	let tc_ri = false; //x Rich  // Affects Availability Atm 6,8, Pop 6-8 Gov 4-9
+          	let tc_va = false; //x Vacuum World (no atmosphere)  Atm 0
+          	let tc_wa = false; //x Water World  Siz 3-9, Atm 3-9, Hyd A
           
           	// determine trade codes from uwp values
 			if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; } //x
@@ -165,9 +159,17 @@ on('ready', () => {
 			// Item’s TL is 10 or more above the World’s TL -4
 
 			let tl_delta_item_world = 0;
-			for (let i = 0; i < 16; i++) {
+			let DM_tl = 0;
+			let i = 0;
+			let DM_normal_market_non_military =  0;
+			let DM_normal_market_military     =  0;
+			let DM_black_market_non_military  =  0;
+			let DM_black_market_military      =  0;
+			let DM_black_market_prohibited    =  0;
+			for (i = 0; i < 16; i+=1) {
+				DM_tl = 0;
 				tl_delta_item_world = i - tl;  // item tl - world tl
-				if (tl_delta >9) {DM_tl = -4;} else if (tl_delta > 4){DM_tl = -2;} else if (tl_delta > 0){DM_tl = -1;} 
+				if (tl_delta_item_world >9) {DM_tl = -5;} else if (tl_delta_item_world > 4){DM_tl = -3;} else if (tl_delta_item_world > 2){DM_tl = -2;} else if (tl_delta_item_world > 0){DM_tl = -1;} 
 	            // market and item type
 				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
 				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
