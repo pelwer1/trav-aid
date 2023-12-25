@@ -67,7 +67,7 @@ on('ready', () => {
             var cmd_trade = cmd_args.join(' '); // system may have multiple trade codes
 
             // parse uwp
-  	       	stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
+						stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
   		      siz = ts_hexToNum(cmd_uwp.charAt(1));
   	      	atm = ts_hexToNum(cmd_uwp.charAt(2));
   	      	hyd = ts_hexToNum(cmd_uwp.charAt(3));
@@ -119,36 +119,45 @@ on('ready', () => {
         		if (atm === 0){ tc_va = true; } //x
         		if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
 
-
-            
-
-
             // calculate the shopping DMs
 
+					  // World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
+						DM_pop = 0;
+					  if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
 
+					  // Starport Class A or B +1; Class X -4
+						DM_stp = 0;		
+					  if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
+
+					  // World has Hi, Ht, In and/or Ri Trade Codes +2
+						// World has Lt, Na, Ni, and/or Po Trade Codes -2
+
+					  DM_tc = 0
+					  if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
+ 
+					
+					DM_law
+					  DM_military = -2
+            DM_gm_fiat = -3
+            DM_pay_2x = 1
+					  DM_pay_3x = 2
             // print out tables of DMs
-
+						// Item TL  |   Non-Military 1xCr  |  Military 3xCr | Black Market Non-Military 2xCr | Black Market Military 5x | Black Market Prohibited 20xCr
+					  //    6     |          DM-2        |       DM-3     |        DM-1                    |        DM-2              |    DM-8
 
 
 
 
 Circumstance DM
-Item is considered highly specialised -1
-Item is typically reserved for military use -2   Cr x5
+x Item is considered highly specialised or exotic -1  (part of GM Fiat) 
+x Item is typically reserved for military use -2   Cr x5
+x Traveller willing to pay double listed cost +1
+x Traveller willing to pay triple listed cost +2
+					
 Item’s TL is greater than the World’s TL -1
 Item’s TL is 3–4 above the World’s TL -1
 Item’s TL is 5–9 above the World’s TL -2
 Item’s TL is 10 or more above the World’s TL -4
-Traveller willing to pay double listed cost +1
-Traveller willing to pay triple listed cost +2
-Starport Class A or B +1
-Starport Class X -4
-World has Hi, Ht, In and/or Ri Trade Codes +2
-World has Lt, Na, Ni, and/or Po Trade Codes -2
-World Population 1–2 -2
-World Population 3–5 -1
-World Population 9 +1
-World Population 10+ +2
 
 The black market of any world can be accessed using
 the Availability rules covered previously but with four
