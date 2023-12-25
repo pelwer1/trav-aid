@@ -67,13 +67,13 @@ on('ready', () => {
             var cmd_trade = cmd_args.join(' '); // system may have multiple trade codes
 
             // parse uwp
-						stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
-  		      siz = ts_hexToNum(cmd_uwp.charAt(1));
+			stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
+			siz = ts_hexToNum(cmd_uwp.charAt(1));
   	      	atm = ts_hexToNum(cmd_uwp.charAt(2));
   	      	hyd = ts_hexToNum(cmd_uwp.charAt(3));
   	      	pop = ts_hexToNum(cmd_uwp.charAt(4));
-        		gov = ts_hexToNum(cmd_uwp.charAt(5));
-        		law = ts_hexToNum(cmd_uwp.charAt(6)); // Affects Availability (Black Market)
+			gov = ts_hexToNum(cmd_uwp.charAt(5));
+			law = ts_hexToNum(cmd_uwp.charAt(6)); // Affects Availability (Black Market)
   	      	tl  = ts_hexToNum(cmd_uwp.charAt(8)); // Affects Availability
   
         	  // config trade code variables
@@ -99,90 +99,79 @@ on('ready', () => {
           
           
           	// determine trade codes from uwp values
-        		if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; } //x
-        		if (siz === 0 && atm === 0 && hyd === 0){ tc_as = true; } //x
-        		if (pop === 0 && gov === 0 && law === 0) { tc_ba = true; } //x
-        		if (hyd === 0 && (atm > 1 && atm < 10)) { tc_de = true; } //x
-        		if (hyd > 0 && atm > 9) { tc_fl = true; } //x
-        		if ((siz > 5 && siz < 9 ) && (atm === 5 || atm === 6 || atm === 8) && (hyd > 4 && hyd < 8)) { tc_ga = true; } //x
-        		if ((siz > 2 ) && (atm === 2 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && (hyd < 3)) { tc_he = true; } //x
-        		if (pop > 8) { tc_hi = true; } //x
-        		if (tl > 11) { tc_ht = true; } //x
-        		if (atm < 2 && hyd > 0) { tc_ic = true; } //x
-        		if ((atm < 3 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && pop > 8) { tc_in = true; } //x
-        		if (pop < 4) { tc_lo = true; } //x
-        		if (tl < 6) { tc_lt = true; } //x
-        		if (atm < 4 && hyd < 4 && pop > 5) { tc_na = true; } //x
-        		if (pop > 3 && pop < 7) { tc_ni = true; } //x
-        		if ((atm > 1 && atm < 6) && hyd < 4) { tc_po = true; } //x
-        		if ((atm === 6 || atm === 8) && (pop > 5 && pop < 9) && (gov > 3 && gov < 10)){ tc_ri = true; } //x
-        		if (atm === 0){ tc_va = true; } //x
-        		if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
+			if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; } //x
+			if (siz === 0 && atm === 0 && hyd === 0){ tc_as = true; } //x
+			if (pop === 0 && gov === 0 && law === 0) { tc_ba = true; } //x
+			if (hyd === 0 && (atm > 1 && atm < 10)) { tc_de = true; } //x
+			if (hyd > 0 && atm > 9) { tc_fl = true; } //x
+			if ((siz > 5 && siz < 9 ) && (atm === 5 || atm === 6 || atm === 8) && (hyd > 4 && hyd < 8)) { tc_ga = true; } //x
+			if ((siz > 2 ) && (atm === 2 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && (hyd < 3)) { tc_he = true; } //x
+			if (pop > 8) { tc_hi = true; } //x
+			if (tl > 11) { tc_ht = true; } //x
+			if (atm < 2 && hyd > 0) { tc_ic = true; } //x
+			if ((atm < 3 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && pop > 8) { tc_in = true; } //x
+			if (pop < 4) { tc_lo = true; } //x
+			if (tl < 6) { tc_lt = true; } //x
+			if (atm < 4 && hyd < 4 && pop > 5) { tc_na = true; } //x
+			if (pop > 3 && pop < 7) { tc_ni = true; } //x
+			if ((atm > 1 && atm < 6) && hyd < 4) { tc_po = true; } //x
+			if ((atm === 6 || atm === 8) && (pop > 5 && pop < 9) && (gov > 3 && gov < 10)){ tc_ri = true; } //x
+			if (atm === 0){ tc_va = true; } //x
+			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
 
             // calculate the shopping DMs
+            DM_gm_fiat  = -2
+            DM_pay_2x   =  1
+			DM_pay_3x   =  2
 
-					  // World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
-						DM_pop = 0;
-					  if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
+			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
+			DM_pop = 0;
+			if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
 
-					  // Starport Class A or B +1; Class X -4
-						DM_stp = 0;		
-					  if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
+			// Starport Class A or B +1; Class X -4
+			DM_stp = 0;		
+			if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
 
-					  // World has Hi, Ht, In and/or Ri Trade Codes +2
-						// World has Lt, Na, Ni, and/or Po Trade Codes -2
+			// World has Hi, Ht, In and/or Ri Trade Codes +2
+			// World has Lt, Na, Ni, and/or Po Trade Codes -2
+			DM_tc = 0
+			if (tc_hi || tc_ht || tc_in || tc_ri) { DM_tc = 2; } 
+			if (tc_lt || tc_na || tc_ni || tc_po) { DM_tc = DM_tc - 2; } 
+ 					
+			// Law Level 0 +2; 1–3 +1; 7–9 -1; 10+ -2
+			DM_law = 0
+			if (law === 0) {DM_law = 2;} else if (law < 4) { DM_law = 1; } else if (law < 10) { DM_law = -1; } else if (law > 9) { DM_law = -2; }
 
-					  DM_tc = 0
-					  if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
- 
-					
-					DM_law
-					  DM_military = -2
-            DM_gm_fiat = -3
-            DM_pay_2x = 1
-					  DM_pay_3x = 2
+            // market and item type
+			DM_normal_market_non_military = 0 // Crx1
+			DM_normal_market_military = -2    // Crx3
+			DM_black_market_non_military = 2  // Crx2 
+			DM_black_market_military = -1     // Crx5
+			DM_black_market_prohibited = -6   // Crx20
+
             // print out tables of DMs
-						// Item TL  |   Non-Military 1xCr  |  Military 3xCr | Black Market Non-Military 2xCr | Black Market Military 5x | Black Market Prohibited 20xCr
-					  //    6     |          DM-2        |       DM-3     |        DM-1                    |        DM-2              |    DM-8
+			//                      norm              -2                  +2                               -1                          -6
+			// Item TL  |   Non-Military 1xCr  |  Military 3xCr | Black Market Non-Military 2xCr | Black Market Military 5x | Black Market Prohibited 20xCr
+			//    6     |          DM-2        |       DM-3     |        DM-1                    |        DM-2              |    DM-8
+            // Loop thru tech levels, calc delta tl of item vs world, print 5 DMs 
+
+			for (let i = 0; i < cars.length; i++) {
+				text += cars[i] + "<br>";
+			  }
 
 
-
-
-Circumstance DM
-x Item is considered highly specialised or exotic -1  (part of GM Fiat) 
-x Item is typically reserved for military use -2   Cr x5
-x Traveller willing to pay double listed cost +1
-x Traveller willing to pay triple listed cost +2
 					
-Item’s TL is greater than the World’s TL -1
-Item’s TL is 3–4 above the World’s TL -1
-Item’s TL is 5–9 above the World’s TL -2
-Item’s TL is 10 or more above the World’s TL -4
+// Item’s TL is greater than the World’s TL -1
+// Item’s TL is 3–4 above the World’s TL -1
+// Item’s TL is 5–9 above the World’s TL -2
+// Item’s TL is 10 or more above the World’s TL -4
 
-The black market of any world can be accessed using
-the Availability rules covered previously but with four
-additional complications:
-•	 Only Streetwise checks may be used for availability
-on the black market, never Broker.
-•	 Additional modifiers are imposed on the check,
-dependent on Law Level and item sought.
-•	 The item purchased will be much more expensive
-than if purchased legally.
-•	 A negative Effect of -2 or worse on the Streetwise
-check will result in attention from law enforcement.
-The modifiers used on Availability checks using the
-black market are listed on the Black Market table.
+// The black market of any world can be accessed using
+// the Availability rules covered previously but with four
+// additional complications:
+// •	 Only Streetwise checks may be used for availability on the black market, never Broker.
+// •	 A negative Effect of -2 or worse on the Streetwise
+// check will result in attention from law enforcement.
+// The modifiers used on Availability checks using the
+// black market are listed on the Black Market table.
 
-Black Market   = Crx2
-Circumstance DM
-Law Level 0 +2
-Law Level 1–3 +1
-Law Level 4–6 +0
-Law Level 7–9 -1
-Law Level 10+ -2
-Category 1 Item +4
-Category 2 Item +2
-Category 3 Item +0
-Category 4 Item -2
-Category 5 Item -4
-Prohibited Item -6  = CR x5
