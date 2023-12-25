@@ -35,7 +35,7 @@ on('ready', () => {
         // Only run when message is an api type and contains call to this script
         if (msg.type === 'api' && msg.content.indexOf('!trav-shop') !== -1) {
 
-            var args = [];
+            let args = [];
 
             // clean up command line noise and split on "--"
             args = msg.content
@@ -58,13 +58,13 @@ on('ready', () => {
             }
            
             // parse cmd line args
-            var cmd_args = []
+            let cmd_args = []
             cmd_args = args[0].split(/\s+/);
             cmd_args.shift(); // drop switch name
-            var cmd_uwp = cmd_args; // get switch value
+            let cmd_uwp = cmd_args; // get switch value
             cmd_args = args[1].split(/\s+/);
             cmd_args.shift();
-            var cmd_trade = cmd_args.join(' '); // system may have multiple trade codes
+            let cmd_trade = cmd_args.join(' '); // system may have multiple trade codes
 
             // parse uwp
 			stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
@@ -97,7 +97,6 @@ on('ready', () => {
           	tc_va = false; //x Vacuum World (no atmosphere)  Atm 0
           	tc_wa = false; //x Water World  Siz 3-9, Atm 3-9, Hyd A
           
-          
           	// determine trade codes from uwp values
 			if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; } //x
 			if (siz === 0 && atm === 0 && hyd === 0){ tc_as = true; } //x
@@ -120,34 +119,40 @@ on('ready', () => {
 			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
 
             // calculate the shopping DMs
-            DM_gm_fiat  = -2
-            DM_pay_2x   =  1
-			DM_pay_3x   =  2
+            let DM_gm_fiat  = -2;
+            let DM_exotic   = -1;
+            let DM_pay_2x   =  1;
+			let DM_pay_3x   =  2;
 
 			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
-			DM_pop = 0;
+			let DM_pop = 0;
 			if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
 
 			// Starport Class A or B +1; Class X -4
-			DM_stp = 0;		
+			let DM_stp = 0;		
 			if (stp === 10 || stp === 11) { DM_stp = 1; } else if (stp > 16) { DM_stp = -4; }
 
 			// World has Hi, Ht, In and/or Ri Trade Codes +2
 			// World has Lt, Na, Ni, and/or Po Trade Codes -2
-			DM_tc = 0
+			let DM_tc = 0;
 			if (tc_hi || tc_ht || tc_in || tc_ri) { DM_tc = 2; } 
 			if (tc_lt || tc_na || tc_ni || tc_po) { DM_tc = DM_tc - 2; } 
  					
-			// Law Level 0 +2; 1–3 +1; 7–9 -1; 10+ -2
-			DM_law = 0
+			// Law Level 0 +2; 1–3 +1; 7–9 -1; 10+ -2  (Black Market Only) 
+			let DM_law = 0;
 			if (law === 0) {DM_law = 2;} else if (law < 4) { DM_law = 1; } else if (law < 10) { DM_law = -1; } else if (law > 9) { DM_law = -2; }
 
-            // market and item type
-			DM_normal_market_non_military = 0 +  // Crx1
-			DM_normal_market_military = -2    // Crx3
-			DM_black_market_non_military = 2  // Crx2 
-			DM_black_market_military = -1     // Crx5
-			DM_black_market_prohibited = -6   // Crx20
+
+			// The black market of any world can be accessed using
+			// the Availability rules covered previously but with four
+			// additional complications:
+			// •	 Only Streetwise checks may be used for availability on the black market, never Broker.
+			// •	 A negative Effect of -2 or worse on the Streetwise
+			// check will result in attention from law enforcement.
+			// The modifiers used on Availability checks using the
+			// black market are listed on the Black Market table
+
+
 
             // print out tables of DMs
 			//                      norm              -2                  +2                               -1                          -6
@@ -159,20 +164,22 @@ on('ready', () => {
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4
 
+			let tl_delta_item_world = 0;
 			for (let i = 0; i < 16; i++) {
-				log('-=> trav_shop: item TL:' + i + 'NM NM Crx1:' +  <=-');
-
+				tl_delta_item_world = i - tl;  // item tl - world tl
+				if (tl_delta >9) {DM_tl = -4;} else if (tl_delta > 4){DM_tl = -2;} else if (tl_delta > 0){DM_tl = -1;} 
+	            // market and item type
+				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
+				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
+				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx2 
+				DM_black_market_military      = -1 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
+				DM_black_market_prohibited    = -6 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx20
+				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + 'NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
 			}
 
+		} // end if trav_shop
 
-					
+	}); // end on chat message
+}); // end on ready
 
-// The black market of any world can be accessed using
-// the Availability rules covered previously but with four
-// additional complications:
-// •	 Only Streetwise checks may be used for availability on the black market, never Broker.
-// •	 A negative Effect of -2 or worse on the Streetwise
-// check will result in attention from law enforcement.
-// The modifiers used on Availability checks using the
-// black market are listed on the Black Market table.
-
+;
