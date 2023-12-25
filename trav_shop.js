@@ -143,7 +143,7 @@ on('ready', () => {
 			if (law === 0) {DM_law = 2;} else if (law < 4) { DM_law = 1; } else if (law < 10) { DM_law = -1; } else if (law > 9) { DM_law = -2; }
 
             // market and item type
-			DM_normal_market_non_military = 0 // Crx1
+			DM_normal_market_non_military = 0 +  // Crx1
 			DM_normal_market_military = -2    // Crx3
 			DM_black_market_non_military = 2  // Crx2 
 			DM_black_market_military = -1     // Crx5
@@ -154,17 +154,18 @@ on('ready', () => {
 			// Item TL  |   Non-Military 1xCr  |  Military 3xCr | Black Market Non-Military 2xCr | Black Market Military 5x | Black Market Prohibited 20xCr
 			//    6     |          DM-2        |       DM-3     |        DM-1                    |        DM-2              |    DM-8
             // Loop thru tech levels, calc delta tl of item vs world, print 5 DMs 
+			// Item’s TL is greater than the World’s TL -1
+			// Item’s TL is 3–4 above the World’s TL -1
+			// Item’s TL is 5–9 above the World’s TL -2
+			// Item’s TL is 10 or more above the World’s TL -4
 
-			for (let i = 0; i < cars.length; i++) {
-				text += cars[i] + "<br>";
-			  }
+			for (let i = 0; i < 16; i++) {
+				log('-=> trav_shop: item TL:' + i + 'NM NM Crx1:' +  <=-');
+
+			}
 
 
 					
-// Item’s TL is greater than the World’s TL -1
-// Item’s TL is 3–4 above the World’s TL -1
-// Item’s TL is 5–9 above the World’s TL -2
-// Item’s TL is 10 or more above the World’s TL -4
 
 // The black market of any world can be accessed using
 // the Availability rules covered previously but with four
