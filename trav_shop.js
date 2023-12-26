@@ -157,11 +157,7 @@ on('ready', () => {
 			// Item’s TL is greater than the World’s TL -1
 			// Item’s TL is 3–4 above the World’s TL -1
 			// Item’s TL is 5–9 above the World’s TL -2
-			// Item’s TL is 10 or more above the World’s TL -4
-
-			let prev_output = ""
-			let curr_output = ""
-			
+			// Item’s TL is 10 or more above the World’s TL -4			
 			let tl_delta_item_world = 0;
 			let DM_tl = 0;
 			let i = 0;
@@ -175,12 +171,12 @@ on('ready', () => {
 			let printed_DM_tl_n2 = 0;
 			let printed_DM_tl_n3 = 0;
 			let printed_DM_tl_n5 = 0;
-			let item_tl_start = ""
-			let DM_tl_0_output = ""
-			let DM_tl_n1_output = ""
-			let DM_tl_n2_output = ""
-			let DM_tl_n3_output = ""
-			let DM_tl_n5_output = ""
+			let item_tl_start = "";
+			let DM_tl_0_output = "";
+			let DM_tl_n1_output = "";
+			let DM_tl_n2_output = "";
+			let DM_tl_n3_output = "";
+			let DM_tl_n5_output = "";
 			for (i = 0; i < 16; i+=1) {
 				DM_tl = 0;
 				tl_delta_item_world = i - tl;  // item tl - world tl
@@ -196,39 +192,39 @@ on('ready', () => {
                 // print 1 line for each uniq item TL range
 				DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				if (DM_tl === 0) {
-					DM_tl_0_output = "Item TL:0-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_0_output = "Item TL:0-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				} 
 				else if (DM_tl === -1) {
 					if ( ! printed_DM_tl_0) {
 						log('-=> trav_shop: ' + DM_tl_0_output );
 						printed_DM_tl_0 = 1;
-                        item_tl_start = toString(i);
+                        item_tl_start = i.toString();
 					}
-					DM_tl_n1_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_n1_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				}
 				else if (DM_tl === -2) {
 					if ( ! printed_DM_tl_n1) {
 						log('-=> trav_shop: ' + DM_tl_n1_output );
 						printed_DM_tl_n1 = 1;
-                        item_tl_start = toString(i);
+                        item_tl_start = i.toString();
 					}
-					DM_tl_n2_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_n2_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				}
 				else if (DM_tl === -3) {
 					if ( ! printed_DM_tl_n2) {
 						log('-=> trav_shop: ' + DM_tl_n2_output );
 						printed_DM_tl_n2 = 1;
-                        item_tl_start = toString(i);
+                        item_tl_start = i.toString();
 					}
-					DM_tl_n3_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_n3_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				}
 				else if (DM_tl === -5) {
 					if ( ! printed_DM_tl_n3) {
 						log('-=> trav_shop: ' + DM_tl_n3_output );
 						printed_DM_tl_n3 = 1;
-                        item_tl_start = toString(i);
+                        item_tl_start = i.toString();
 					}
-					DM_tl_n5_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_n5_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				}
 			} // end for
 			// print final shopping line after the loop exits
