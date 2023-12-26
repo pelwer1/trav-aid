@@ -159,6 +159,9 @@ on('ready', () => {
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4
 
+			let prev_output = ""
+			let curr_output = ""
+			
 			let tl_delta_item_world = 0;
 			let DM_tl = 0;
 			let i = 0;
@@ -167,18 +170,69 @@ on('ready', () => {
 			let DM_black_market_non_military  =  0;
 			let DM_black_market_military      =  0;
 			let DM_black_market_prohibited    =  0;
+			let printed_DM_tl_0 = 0;
+			let printed_DM_tl_n1 = 0;
+			let printed_DM_tl_n2 = 0;
+			let printed_DM_tl_n3 = 0;
+			let printed_DM_tl_n5 = 0;
+			let item_tl_start = ""
+			let DM_tl_0_output = ""
+			let DM_tl_n1_output = ""
+			let DM_tl_n2_output = ""
+			let DM_tl_n3_output = ""
+			let DM_tl_n5_output = ""
 			for (i = 0; i < 16; i+=1) {
 				DM_tl = 0;
 				tl_delta_item_world = i - tl;  // item tl - world tl
 				if (tl_delta_item_world >9) {DM_tl = -5;} else if (tl_delta_item_world > 4){DM_tl = -3;} else if (tl_delta_item_world > 2){DM_tl = -2;} else if (tl_delta_item_world > 0){DM_tl = -1;} 
-	            // market and item type
+	            // market and item type          0       -2         -1       1        0       0   // Fist: B789430-C  Ni Ht
 				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
 				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
 				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx2 
-				DM_black_market_military      = -1 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
+				DM_black_market_military      = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
 				DM_black_market_prohibited    = -6 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx20
 				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
-			}
+
+                // print 1 line for each uniq item TL range
+				DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				if (DM_tl === 0) {
+					DM_tl_0_output = "Item TL:0-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				} 
+				else if (DM_tl === -1) {
+					if ( ! printed_DM_tl_0) {
+						log('-=> trav_shop: ' + DM_tl_0_output );
+						printed_DM_tl_0 = 1;
+                        item_tl_start = toString(i);
+					}
+					DM_tl_n1_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				}
+				else if (DM_tl === -2) {
+					if ( ! printed_DM_tl_n1) {
+						log('-=> trav_shop: ' + DM_tl_n1_output );
+						printed_DM_tl_n1 = 1;
+                        item_tl_start = toString(i);
+					}
+					DM_tl_n2_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				}
+				else if (DM_tl === -3) {
+					if ( ! printed_DM_tl_n2) {
+						log('-=> trav_shop: ' + DM_tl_n2_output );
+						printed_DM_tl_n2 = 1;
+                        item_tl_start = toString(i);
+					}
+					DM_tl_n3_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				}
+				else if (DM_tl === -5) {
+					if ( ! printed_DM_tl_n3) {
+						log('-=> trav_shop: ' + DM_tl_n3_output );
+						printed_DM_tl_n3 = 1;
+                        item_tl_start = toString(i);
+					}
+					DM_tl_n5_output = "Item TL:"+ item_tl_start + "-" + toString(i) + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				}
+			} // end for
+			// print final shopping line after the loop exits
+			log('-=> trav_shop: ' + DM_tl_n5_output );
 
 		} // end if trav_shop
 
