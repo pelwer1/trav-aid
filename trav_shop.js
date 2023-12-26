@@ -43,7 +43,7 @@ on('ready', () => {
 
             // bail out if api call is not to this script (tests cmd line cleaner)
             if (args.shift() !== "!trav-shop") {
-                // log('-=> trav-shop: command line parsing error - contact developer - exiting ... <=- ');
+                log('-=> trav-shop: command line parsing error - contact developer - exiting ... <=- ');
                 return;
             }
 
@@ -135,22 +135,9 @@ on('ready', () => {
 			if (law === 0) {DM_law = 2;} else if (law < 4) { DM_law = 1; } else if (law < 10) { DM_law = -1; } else if (law > 9) { DM_law = -2; }
 
 
-			// The black market of any world can be accessed using
-			// the Availability rules covered previously but with four
-			// additional complications:
-			// •	 Only Streetwise checks may be used for availability on the black market, never Broker.
-			// •	 A negative Effect of -2 or worse on the Streetwise
-			// check will result in attention from law enforcement.
-			// The modifiers used on Availability checks using the
-			// black market are listed on the Black Market table
-
-
-
-            // print out tables of DMs
-			//                      norm              -2                  +2                               -1                          -6
-			// Item TL  |   Non-Military 1xCr  |  Military 3xCr | Black Market Non-Military 2xCr | Black Market Military 5x | Black Market Prohibited 20xCr
-			//    6     |          DM-2        |       DM-3     |        DM-1                    |        DM-2              |    DM-8
-            // Loop thru tech levels, calc delta tl of item vs world, print 5 DMs 
+	
+            // print out tables of DMs by TL
+            //    - Loop thru tech levels, calc delta tl of item vs world, print 5 DMs 
 			// Item’s TL is greater than the World’s TL -1
 			// Item’s TL is 3–4 above the World’s TL -1
 			// Item’s TL is 5–9 above the World’s TL -2
@@ -162,7 +149,7 @@ on('ready', () => {
 			'<table style="border-collapse:collapse;border-spacing:0" class="tg">' +
 			'<thead>' +
 				'<tr>' +
-					'<th' + th_style + ' >SHOP!</th>' +
+					'<th' + th_style + ' >SHOP DMs</th>' +
 					'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
 					'<th' + th_style + ' colspan="3">Black<br>Market (Streetwise Only) </th>'+
 				'</tr>' +
@@ -192,11 +179,6 @@ on('ready', () => {
 			let printed_DM_tl_n3 = 0;
 			let printed_DM_tl_n5 = 0;
 			let item_tl_start = "";
-			let DM_tl_0_output = "";
-			let DM_tl_n1_output = "";
-			let DM_tl_n2_output = "";
-			let DM_tl_n3_output = "";
-			let DM_tl_n5_output = "";
 			for (i = 0; i < tl+11; i+=1) {
 				DM_tl = 0;
 				tl_delta_item_world = i - tl;  // item tl - world tl
@@ -241,45 +223,24 @@ on('ready', () => {
 				}
 
                 // print 1 line for each uniq item TL range
-				// DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
-				if (DM_tl === 0 || i === 0) {
-					DM_tl_0_output = "Item TL:0-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
-				} 
-				else if (DM_tl === -1) {
-					if ( ! printed_DM_tl_0) {
-						log('-=> trav_shop1: ' + DM_tl_0_output );
-						printed_DM_tl_0 = 1;
-                        item_tl_start = i.toString();
-					}
-					DM_tl_n1_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				if (DM_tl === -1 &&  ! printed_DM_tl_0) {
+					printed_DM_tl_0 = 1;
+					item_tl_start = i.toString();
 				}
-				else if (DM_tl === -2) {
-					if ( ! printed_DM_tl_n1) {
-						log('-=> trav_shop2: ' + DM_tl_n1_output );
-						printed_DM_tl_n1 = 1;
-                        item_tl_start = i.toString();
-					}
-					DM_tl_n2_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				else if (DM_tl === -2 && ! printed_DM_tl_n1) {
+					printed_DM_tl_n1 = 1;
+					item_tl_start = i.toString();
 				}
-				else if (DM_tl === -3) {
-					if ( ! printed_DM_tl_n2) {
-						log('-=> trav_shop3: ' + DM_tl_n2_output );
-						printed_DM_tl_n2 = 1;
-                        item_tl_start = i.toString();
-					}
-					DM_tl_n3_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				else if (DM_tl === -3 &&  ! printed_DM_tl_n2) {
+					printed_DM_tl_n2 = 1;
+					item_tl_start = i.toString();
 				}
-				else if (DM_tl === -5) {
-					if ( ! printed_DM_tl_n3) {
-						log('-=> trav_shop4: ' + DM_tl_n3_output );
-						printed_DM_tl_n3 = 1;
-                        item_tl_start = i.toString();
-					}
-					DM_tl_n5_output = "Item TL:"+ item_tl_start + "+" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				else if (DM_tl === -5 &&  ! printed_DM_tl_n3) {
+					printed_DM_tl_n3 = 1;
+					item_tl_start = i.toString();
 				}
 			} // end for
 			// print final shopping line after the loop exits
-			log('-=> trav_shop5: ' + DM_tl_n5_output );
 			html = html +   "<tr>" +  
 			"<td" + td_style + " >" + item_tl_start + "+"                + "</td>" +
 			"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
@@ -312,87 +273,3 @@ on('ready', () => {
 }); // end on ready
 
 ;
-/*
-<table>
-<thead>
-  <tr>
-    <th></th>
-    <th colspan="2">Normal Market</th>
-    <th colspan="3">Black Market</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Item TL</td>
-    <td>Civilian</td>
-    <td>Military</td>
-    <td>Civilian</td>
-    <td>Military</td>
-    <td>Prohibited</td>
-  </tr>
-  <tr>
-    <td>0-a</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>b-c</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>d-e</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>f-g</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>h-i</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td colspan="6">Footer:&nbsp;&nbsp;Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>
-  </tr>
-</tbody>
-</table>
-
-/*
-  Fist: B789430-C  Ni Ht
-  if last line is same as current line => extend TL entry into a range.
-"-=> trav_shop: item TL: 0 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 1 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 2 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 3 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 4 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 5 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 6 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 7 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 8 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL: 9 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL:10 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL:11 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL:12 NM Civ Crx1:-2 NM Mil Crx3:-4 BM Civ Crx2:2 BM Mil Crx5:-1 BM Prohib Crx20:-6 <=-"
-"-=> trav_shop: item TL:13 NM Civ Crx1:-3 NM Mil Crx3:-5 BM Civ Crx2:1 BM Mil Crx5:-2 BM Prohib Crx20:-7 <=-"
-"-=> trav_shop: item TL:14 NM Civ Crx1:-3 NM Mil Crx3:-5 BM Civ Crx2:1 BM Mil Crx5:-2 BM Prohib Crx20:-7 <=-"
-"-=> trav_shop: item TL:15 NM Civ Crx1:-4 NM Mil Crx3:-6 BM Civ Crx2:0 BM Mil Crx5:-3 BM Prohib Crx20:-8 <=-"
-*/
