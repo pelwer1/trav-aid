@@ -158,6 +158,23 @@ on('ready', () => {
 			// Item’s TL is 3–4 above the World’s TL -1
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4			
+            let html = `<table> 
+			<thead> 
+			  <tr> 
+				<th></th> 
+				<th colspan="2">Normal Market</th> 
+				<th colspan="3">Black Market</th> 
+			  </tr> 
+			</thead> 
+			<tbody> 
+			  <tr> 
+				<td>Item TL</td> 
+				<td>Civilian</td> 
+				<td>Military</td> 
+				<td>Civilian</td> 
+				<td>Military</td> 
+				<td>Prohibited</td> 
+			  </tr>`;
 			let tl_delta_item_world = 0;
 			let DM_tl = 0;
 			let i = 0;
@@ -177,10 +194,13 @@ on('ready', () => {
 			let DM_tl_n2_output = "";
 			let DM_tl_n3_output = "";
 			let DM_tl_n5_output = "";
-			for (i = 0; i < 16; i+=1) {
+			for (i = 0; i < tl+11; i+=1) {
 				DM_tl = 0;
 				tl_delta_item_world = i - tl;  // item tl - world tl
-				if (tl_delta_item_world >9) {DM_tl = -5;} else if (tl_delta_item_world > 4){DM_tl = -3;} else if (tl_delta_item_world > 2){DM_tl = -2;} else if (tl_delta_item_world > 0){DM_tl = -1;} 
+				if      (tl_delta_item_world > 9){DM_tl = -5;} 
+				else if (tl_delta_item_world > 4){DM_tl = -3;} 
+				else if (tl_delta_item_world > 2){DM_tl = -2;} 
+				else if (tl_delta_item_world > 0){DM_tl = -1;} 
 	            // market and item type          0       -2         -1       1        0       0   // Fist: B789430-C  Ni Ht
 				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
 				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
@@ -190,13 +210,22 @@ on('ready', () => {
 				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
 
                 // print 1 line for each uniq item TL range
-				DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
-				if (DM_tl === 0) {
+				// DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+				if (DM_tl === 0 || i === 0) {
 					DM_tl_0_output = "Item TL:0-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				} 
 				else if (DM_tl === -1) {
 					if ( ! printed_DM_tl_0) {
-						log('-=> trav_shop: ' + DM_tl_0_output );
+						log('-=> trav_shop1: ' + DM_tl_0_output );
+						html = html +   "<tr>" +  
+						"<td>0-" + i.toString() + "</td>" +
+						"<td>" + DM_normal_market_non_military + "</td>"  + 
+						"<td>" + DM_normal_market_military     + "</td>"  +
+						"<td>" + DM_black_market_non_military  + "</td>"  +
+						"<td>" + DM_black_market_military      + "</td>"  +
+						"<td>" + DM_black_market_prohibited    + "</td>"  +
+						"</tr>";
+
 						printed_DM_tl_0 = 1;
                         item_tl_start = i.toString();
 					}
@@ -204,7 +233,7 @@ on('ready', () => {
 				}
 				else if (DM_tl === -2) {
 					if ( ! printed_DM_tl_n1) {
-						log('-=> trav_shop: ' + DM_tl_n1_output );
+						log('-=> trav_shop2: ' + DM_tl_n1_output );
 						printed_DM_tl_n1 = 1;
                         item_tl_start = i.toString();
 					}
@@ -212,7 +241,7 @@ on('ready', () => {
 				}
 				else if (DM_tl === -3) {
 					if ( ! printed_DM_tl_n2) {
-						log('-=> trav_shop: ' + DM_tl_n2_output );
+						log('-=> trav_shop3: ' + DM_tl_n2_output );
 						printed_DM_tl_n2 = 1;
                         item_tl_start = i.toString();
 					}
@@ -220,7 +249,7 @@ on('ready', () => {
 				}
 				else if (DM_tl === -5) {
 					if ( ! printed_DM_tl_n3) {
-						log('-=> trav_shop: ' + DM_tl_n3_output );
+						log('-=> trav_shop4: ' + DM_tl_n3_output );
 						printed_DM_tl_n3 = 1;
                         item_tl_start = i.toString();
 					}
@@ -228,7 +257,13 @@ on('ready', () => {
 				}
 			} // end for
 			// print final shopping line after the loop exits
-			log('-=> trav_shop: ' + DM_tl_n5_output );
+			log('-=> trav_shop5: ' + DM_tl_n5_output );
+			html = html +  `<tr> \
+				<td colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td> 
+				</tr> 
+				</tbody> 
+				</table> `;
+				sendChat("trav-shop", "\n"+html);
 
 		} // end if trav_shop
 
@@ -236,6 +271,70 @@ on('ready', () => {
 }); // end on ready
 
 ;
+/*
+<table>
+<thead>
+  <tr>
+    <th></th>
+    <th colspan="2">Normal Market</th>
+    <th colspan="3">Black Market</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Item TL</td>
+    <td>Civilian</td>
+    <td>Military</td>
+    <td>Civilian</td>
+    <td>Military</td>
+    <td>Prohibited</td>
+  </tr>
+  <tr>
+    <td>0-a</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>b-c</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>d-e</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>f-g</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>h-i</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan="6">Footer:&nbsp;&nbsp;Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>
+  </tr>
+</tbody>
+</table>
+
 /*
   Fist: B789430-C  Ni Ht
   if last line is same as current line => extend TL entry into a range.
