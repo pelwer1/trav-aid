@@ -115,9 +115,6 @@ on('ready', () => {
 
             // calculate the shopping DMs
             let DM_gm_fiat  = -2;
-            let DM_exotic   = -1;
-            let DM_pay_2x   =  1;
-			let DM_pay_3x   =  2;
 
 			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
 			let DM_pop = 0;
@@ -166,8 +163,8 @@ on('ready', () => {
 			'<thead>' +
 				'<tr>' +
 					'<th' + th_style + ' >SHOP!</th>' +
-					'<th' + th_style + ' colspan="2">Normal<br>Market</th>' +
-					'<th' + th_style + ' colspan="3">Black<br>Market</th>'+
+					'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
+					'<th' + th_style + ' colspan="3">Black<br>Market (Streetwise Only) </th>'+
 				'</tr>' +
 			'</thead>' +
 			'<tbody>' +
@@ -207,7 +204,7 @@ on('ready', () => {
 				else if (tl_delta_item_world > 4){DM_tl = -3;} 
 				else if (tl_delta_item_world > 2){DM_tl = -2;} 
 				else if (tl_delta_item_world > 0){DM_tl = -1;} 
-				next_tl_delta_item_world = tl_delta_item_world - 1;  // item tl - world tl
+				next_tl_delta_item_world = tl_delta_item_world + 1;  // item tl - world tl
 				if      (next_tl_delta_item_world > 9){next_DM_tl = -5;} 
 				else if (next_tl_delta_item_world > 4){next_DM_tl = -3;} 
 				else if (next_tl_delta_item_world > 2){next_DM_tl = -2;} 
@@ -223,7 +220,7 @@ on('ready', () => {
 				if (DM_tl !== next_DM_tl) {
 					if ( ! printed_DM_tl_0) {
 						html = html +   "<tr>" +  
-						"<td" + td_style + " >0-" + (i-1).toString() + "</td>" +
+						"<td" + td_style + " >0-" + (i).toString() + "</td>" +
 						"<td" + td_style + " >" + DM_normal_market_non_military + "</td>"  + 
 						"<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
 						"<td" + td_style + " >" + DM_black_market_non_military  + "</td>"  +
@@ -233,7 +230,7 @@ on('ready', () => {
 					}
 					else {
 						html = html +   "<tr>" +  
-						"<td" + td_style + " >" + item_tl_start + "-" + (i-1).toString() + "</td>" +
+						"<td" + td_style + " >" + item_tl_start + "-" + (i).toString() + "</td>" +
 						"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
 						"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
 						"<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
@@ -291,12 +288,22 @@ on('ready', () => {
 			"<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
 			"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
 			"</tr>";
-			html = html +  '<tr>' +
-				'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>' + 
-				'</tr> ' +
-				'</tbody>' + 
-				'</table>' + 
-				'</div>';
+			html = html +  
+			'<tr>' +
+			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>' + 
+			'</tr> ' +
+			'<tr>' +
+			'<td' + td_style + ' colspan="6">Use Black Market for Illegal Goods.</td>' + 
+			'</tr> ' +
+			'<tr>' +
+			'<td' + td_style + ' colspan="6">Black Market Streetwise Effect-2<br>or worse attacts Law Enforcement.</td>' + 
+			'</tr> ' +
+			'<tr>' +
+			'<td' + td_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</td>' + 
+			'</tr> ' +
+			'</tbody>' + 
+			'</table>' + 
+			'</div>';
 			sendChat("trav-shop", "\n"+html);
 
 		} // end if trav_shop
