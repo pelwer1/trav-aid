@@ -158,25 +158,31 @@ on('ready', () => {
 			// Item’s TL is 3–4 above the World’s TL -1
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4			
-            let html = `<table> 
-			<thead> 
-			  <tr> 
-				<th></th> 
-				<th colspan="2">Normal Market</th> 
-				<th colspan="3">Black Market</th> 
-			  </tr> 
-			</thead> 
-			<tbody> 
-			  <tr> 
-				<td>Item TL</td> 
-				<td>Civilian</td> 
-				<td>Military</td> 
-				<td>Civilian</td> 
-				<td>Military</td> 
-				<td>Prohibited</td> 
-			  </tr>`;
+			let th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal"';
+			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
+			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
+			let html = '<div style="border: 1px solid black; background-color: white; padding: 3px 3px;">' +
+			'<table style="border-collapse:collapse;border-spacing:0" class="tg">' +
+			'<thead>' +
+				'<tr>' +
+					'<th' + th_style + ' >SHOP!</th>' +
+					'<th' + th_style + ' colspan="2">Normal<br>Market</th>' +
+					'<th' + th_style + ' colspan="3">Black<br>Market</th>'+
+				'</tr>' +
+			'</thead>' +
+			'<tbody>' +
+				'<tr>' +
+					'<td' + td_th_style + ' >Item TL</td>' +
+					'<td' + td_th_style + ' >Civ</td>' +
+					'<td' + td_th_style + ' >Mil</td>' +
+					'<td' + td_th_style + ' >Civ</td>' +
+					'<td' + td_th_style + ' >Mil</td>' +
+					'<td' + td_th_style + ' >Pro</td>' +
+				'</tr>';
 			let tl_delta_item_world = 0;
+			let next_tl_delta_item_world = 0;
 			let DM_tl = 0;
+			let next_DM_tl = 0;
 			let i = 0;
 			let DM_normal_market_non_military =  0;
 			let DM_normal_market_military     =  0;
@@ -201,13 +207,41 @@ on('ready', () => {
 				else if (tl_delta_item_world > 4){DM_tl = -3;} 
 				else if (tl_delta_item_world > 2){DM_tl = -2;} 
 				else if (tl_delta_item_world > 0){DM_tl = -1;} 
+				next_tl_delta_item_world = tl_delta_item_world - 1;  // item tl - world tl
+				if      (next_tl_delta_item_world > 9){next_DM_tl = -5;} 
+				else if (next_tl_delta_item_world > 4){next_DM_tl = -3;} 
+				else if (next_tl_delta_item_world > 2){next_DM_tl = -2;} 
+				else if (next_tl_delta_item_world > 0){next_DM_tl = -1;} 
 	            // market and item type          0       -2         -1       1        0       0   // Fist: B789430-C  Ni Ht
 				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
 				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
 				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx2 
 				DM_black_market_military      = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
 				DM_black_market_prohibited    = -6 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx20
-				log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
+				// log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
+
+				if (DM_tl !== next_DM_tl) {
+					if ( ! printed_DM_tl_0) {
+						html = html +   "<tr>" +  
+						"<td" + td_style + " >0-" + (i-1).toString() + "</td>" +
+						"<td" + td_style + " >" + DM_normal_market_non_military + "</td>"  + 
+						"<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_non_military  + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_military      + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_prohibited    + "</td>"  +
+						"</tr>";
+					}
+					else {
+						html = html +   "<tr>" +  
+						"<td" + td_style + " >" + item_tl_start + "-" + (i-1).toString() + "</td>" +
+						"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
+						"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
+						"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+						"</tr>";
+					}
+				}
 
                 // print 1 line for each uniq item TL range
 				// DM_tl_0_output = "Item TL:0" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
@@ -217,15 +251,6 @@ on('ready', () => {
 				else if (DM_tl === -1) {
 					if ( ! printed_DM_tl_0) {
 						log('-=> trav_shop1: ' + DM_tl_0_output );
-						html = html +   "<tr>" +  
-						"<td>0-" + i.toString() + "</td>" +
-						"<td>" + DM_normal_market_non_military + "</td>"  + 
-						"<td>" + DM_normal_market_military     + "</td>"  +
-						"<td>" + DM_black_market_non_military  + "</td>"  +
-						"<td>" + DM_black_market_military      + "</td>"  +
-						"<td>" + DM_black_market_prohibited    + "</td>"  +
-						"</tr>";
-
 						printed_DM_tl_0 = 1;
                         item_tl_start = i.toString();
 					}
@@ -253,17 +278,26 @@ on('ready', () => {
 						printed_DM_tl_n3 = 1;
                         item_tl_start = i.toString();
 					}
-					DM_tl_n5_output = "Item TL:"+ item_tl_start + "-" + i.toString() + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
+					DM_tl_n5_output = "Item TL:"+ item_tl_start + "+" + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-';
 				}
 			} // end for
 			// print final shopping line after the loop exits
 			log('-=> trav_shop5: ' + DM_tl_n5_output );
-			html = html +  `<tr> \
-				<td colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td> 
-				</tr> 
-				</tbody> 
-				</table> `;
-				sendChat("trav-shop", "\n"+html);
+			html = html +   "<tr>" +  
+			"<td" + td_style + " >" + item_tl_start + "+"                + "</td>" +
+			"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
+			"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
+			"<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
+			"<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
+			"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+			"</tr>";
+			html = html +  '<tr>' +
+				'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>' + 
+				'</tr> ' +
+				'</tbody>' + 
+				'</table>' + 
+				'</div>';
+			sendChat("trav-shop", "\n"+html);
 
 		} // end if trav_shop
 
