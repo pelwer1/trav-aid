@@ -142,26 +142,26 @@ on('ready', () => {
 			// Item’s TL is 3–4 above the World’s TL -1
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4			
-			let th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal"';
-			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
-			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:7px 7px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
-			let html = '<div style="border: 1px solid black; background-color: white; padding: 3px 3px;">' +
-			'<table style="border-collapse:collapse;border-spacing:0" class="tg">' +
+			let th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal"';
+			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
+			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
+			let html = '<div style="border: 1px solid black; background-color: white; padding: 1px 1px; width: 99%;">' +
+			'<table style="border-collapse:collapse;border-spacing:0" >' +
 			'<thead>' +
 				'<tr>' +
-					'<th' + th_style + ' >SHOP DMs</th>' +
+					'<th' + th_style + ' >SHOP<br>DMs</th>' +
 					'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
 					'<th' + th_style + ' colspan="3">Black<br>Market (Streetwise Only) </th>'+
 				'</tr>' +
 			'</thead>' +
 			'<tbody>' +
 				'<tr>' +
-					'<td' + td_th_style + ' >Item TL</td>' +
-					'<td' + td_th_style + ' >Civ</td>' +
-					'<td' + td_th_style + ' >Mil</td>' +
-					'<td' + td_th_style + ' >Civ</td>' +
-					'<td' + td_th_style + ' >Mil</td>' +
-					'<td' + td_th_style + ' >Pro</td>' +
+					'<td' + td_th_style + ' >Item<br>TL</td>' +
+					'<td' + td_th_style + ' >Civ<br>Crx1</td>' +
+					'<td' + td_th_style + ' >Mil<br>Crx1</td>' +
+					'<td' + td_th_style + ' >Civ<br>Crx2</td>' +
+					'<td' + td_th_style + ' >Mil<br>Crx5</td>' +
+					'<td' + td_th_style + ' >Pro<br>Crx20</td>' +
 				'</tr>';
 			let tl_delta_item_world = 0;
 			let next_tl_delta_item_world = 0;
@@ -251,7 +251,7 @@ on('ready', () => {
 			"</tr>";
 			html = html +  
 			'<tr>' +
-			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM -1</td>' + 
+			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM-1</td>' + 
 			'</tr> ' +
 			'<tr>' +
 			'<td' + td_style + ' colspan="6">Use Black Market for Illegal Goods.</td>' + 
