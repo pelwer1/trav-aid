@@ -268,20 +268,50 @@ on('ready', () => {
 			'<td' + td_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</td>' + 
 			'</tr> ' +
 			'<tr>' +
-			'<td' + td_left_style + ' colspan="6"><b>Law Level Restrictions (Cumulative):</b><br> ' + 
-				'0 No restrictions, heavy armor and weapons recommended <br>' +
-				'1 Poison gas, explosives, undetectable weapons, WMD; Battle Dress <br>' +
-				'2 Portable energy and laser weapons; Combat Armor <br>' +
-				'3 Military weapons, all portable heavy weapons; Flak and Obvious Armor <br>' +
-				'4 Light assault weapons and submachine guns, all automatic weapons; Cloth Armor <br>' +
-				'5 Personal concealable ranged weapons, pistols, revolvers; Mesh Armor <br>' +
-				'6 All firearms except shotguns & stunners; carrying weapons and armor discouraged <br>' +
-				'7 Shotguns and all other ranged firearms <br>' +
-				'8 All bladeds, stunners; All visible armor <br>' +
-				'9 All weapons; All armor <br>' +
-				'A (10) All weapons violations are treated as Serious crimes  <br>' +
-				'B (11) Random weapon violation sweeps<br>' +
-				'C+ (12+) Active monitoring for violations'   + '</td>' + 
+			'<td' + td_left_style + ' colspan="6"><b>Law Leved [' + law.toString()+ '] Banned (Cumulative):</b><br>' ;
+			for (i = 0; i < law+1; i+=1) {
+				switch (i) {
+					case 0:
+						html = html + '0 No restrictions, heavy armor and weapons recommended<br>'; 
+							break;
+					case 1:
+						html = html + '1 Poison gas, explosives, undetectable weapons, WMD; Battle Dress<br>';
+					  break;
+					case 2:
+						html = html + '2 Portable energy and laser weapons; Combat Armor<br>';
+					  break;
+					case 3:
+						html = html + '3 Military weapons, all portable heavy weapons; Flak and Obvious Armor<br>';
+					  break;
+					case 4:
+						html = html + '4 Light assault weapons and submachine guns, all automatic weapons; Cloth Armor<br>';
+					  break;
+					  case 5:
+						html = html + '5 Personal concealable ranged weapons, pistols, revolvers; Mesh Armor<br>';
+					  break;
+					  case 6:
+						html = html + '6 All firearms except shotguns & stunners; carrying weapons and armor discouraged<br>';
+					  break;
+					  case 7:
+						html = html + '7 Shotguns and all other ranged firearms<br>'; 
+					  break;
+					  case 8:
+						html = html + '8 All bladeds, stunners; All visible armor<br>';
+					  break;
+					  case 9:
+						html = html + '9 All weapons; All armor<br>'; 
+					  break;
+					  case 10:
+						html = html + 'A(10) All violations are Serious crimes<br>';
+					  break;
+					  case 11:
+						html = html + 'B(11) Random weapon violation sweeps<br>';
+					  break;
+					case 12:
+						html = html + 'C+(12+) Active monitoring for violations';  
+				  } // end switch
+				} // end for i
+			html = html + '</td>' + 
 			'</tr> ' +
 			'</tbody>' + 
 			'</table>' + 
@@ -294,3 +324,5 @@ on('ready', () => {
 }); // end on ready
 
 ;
+
+
