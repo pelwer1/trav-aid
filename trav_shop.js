@@ -256,7 +256,7 @@ on('ready', () => {
 			"</tr>";
 			html = html +  
 			'<tr>' +
-			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2;  Exotic = DM-1</td>' + 
+			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2; Uncommon = DM-1</td>' + 
 			'</tr> ' +
 			'<tr>' +
 			'<td' + td_style + ' colspan="6">Use Black Market for Illegal Goods.</td>' + 
