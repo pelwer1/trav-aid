@@ -149,6 +149,9 @@ on('ready', () => {
 			'<table style="border-collapse:collapse;border-spacing:0" >' +
 			'<thead>' +
 				'<tr>' +
+					'<th' + th_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</th>' + 
+				'</tr> ' +
+				'<tr>' +
 					'<th' + th_style + ' >SHOP<br>DMs</th>' +
 					'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
 					'<th' + th_style + ' colspan="3">Black<br>Market (Streetwise Only) </th>'+
@@ -261,6 +264,22 @@ on('ready', () => {
 			'</tr> ' +
 			'<tr>' +
 			'<td' + td_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</td>' + 
+			'</tr> ' +
+			'<tr>' +
+			'<td' + td_style + ' colspan="6"><b>Law Level Restrictions (Cumulative):</b><br> ' + 
+				'0 No restrictions, heavy armor and weapons recommended <br>' +
+				'1 Poison gas, explosives, undetectable weapons, WMD; Battle dress <br>' +
+				'2 Portable energy and laser weapons; Combat Armor <br>' +
+				'3 Military weapons, all portable heavy weapons; Flak and Obvious Armor <br>' +
+				'4 Light assault weapons and submachine guns, all fully automatic weapons; Cloth Armor <br>' +
+				'5 Personal concealable ranged weapons, pistols, revolvers; Mesh Armor <br>' +
+				'6 All firearms except shotguns & stunners; carrying weapons and wearing armor discouraged <br>' +
+				'7 Shotguns and all other ranged firearms <br>' +
+				'8 All bladed weapons, stunners; All visible armor <br>' +
+				'9 All weapons; All armor <br>' +
+				'A (10) All weapons violations are treated as Serious crimes  <br>' +
+				'B (11) Random sweeps for weapons violations  <br>' +
+				'C+ (12+) Active monitoring for violations'   + '</td>' + 
 			'</tr> ' +
 			'</tbody>' + 
 			'</table>' + 
