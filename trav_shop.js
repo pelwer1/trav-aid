@@ -133,8 +133,6 @@ on('ready', () => {
 			// Law Level 0 +2; 1–3 +1; 7–9 -1; 10+ -2  (Black Market Only) 
 			let DM_law = 0;
 			if (law === 0) {DM_law = 2;} else if (law < 4) { DM_law = 1; } else if (law < 10) { DM_law = -1; } else if (law > 9) { DM_law = -2; }
-
-
 	
             // print out tables of DMs by TL
             //    - Loop thru tech levels, calc delta tl of item vs world, print 5 DMs 
@@ -144,9 +142,13 @@ on('ready', () => {
 			// Item’s TL is 10 or more above the World’s TL -4			
 			let th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal"';
 			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
-			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
-			let html = '<div style="border: 1px solid black; background-color: white; padding: 1px 1px; width: 99%;">' +
-			'<table style="border-collapse:collapse;border-spacing:0" >' +
+			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nwrap;"';
+			let td_left_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:left;vertical-align:middle;word-break:normal;white-space:normal;"';
+
+
+            // tried to stretch output using display:table, block, inline-block, contents, flex, grid, inherit, initial
+			let html = '<div style="width: 99%; border: 1px solid black; background-color: white; padding: 1px 1px; ">' +
+			'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 			'<thead>' +
 				'<tr>' +
 					'<th' + th_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</th>' + 
@@ -154,7 +156,7 @@ on('ready', () => {
 				'<tr>' +
 					'<th' + th_style + ' >SHOP<br>DMs</th>' +
 					'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
-					'<th' + th_style + ' colspan="3">Black<br>Market (Streetwise Only) </th>'+
+					'<th' + th_style + ' colspan="3">Black<br>Market<br>(Streetwise Only) </th>'+
 				'</tr>' +
 			'</thead>' +
 			'<tbody>' +
@@ -266,19 +268,19 @@ on('ready', () => {
 			'<td' + td_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</td>' + 
 			'</tr> ' +
 			'<tr>' +
-			'<td' + td_style + ' colspan="6"><b>Law Level Restrictions (Cumulative):</b><br> ' + 
+			'<td' + td_left_style + ' colspan="6"><b>Law Level Restrictions (Cumulative):</b><br> ' + 
 				'0 No restrictions, heavy armor and weapons recommended <br>' +
-				'1 Poison gas, explosives, undetectable weapons, WMD; Battle dress <br>' +
+				'1 Poison gas, explosives, undetectable weapons, WMD; Battle Dress <br>' +
 				'2 Portable energy and laser weapons; Combat Armor <br>' +
 				'3 Military weapons, all portable heavy weapons; Flak and Obvious Armor <br>' +
-				'4 Light assault weapons and submachine guns, all fully automatic weapons; Cloth Armor <br>' +
+				'4 Light assault weapons and submachine guns, all automatic weapons; Cloth Armor <br>' +
 				'5 Personal concealable ranged weapons, pistols, revolvers; Mesh Armor <br>' +
-				'6 All firearms except shotguns & stunners; carrying weapons and wearing armor discouraged <br>' +
+				'6 All firearms except shotguns & stunners; carrying weapons and armor discouraged <br>' +
 				'7 Shotguns and all other ranged firearms <br>' +
-				'8 All bladed weapons, stunners; All visible armor <br>' +
+				'8 All bladeds, stunners; All visible armor <br>' +
 				'9 All weapons; All armor <br>' +
 				'A (10) All weapons violations are treated as Serious crimes  <br>' +
-				'B (11) Random sweeps for weapons violations  <br>' +
+				'B (11) Random weapon violation sweeps<br>' +
 				'C+ (12+) Active monitoring for violations'   + '</td>' + 
 			'</tr> ' +
 			'</tbody>' + 
