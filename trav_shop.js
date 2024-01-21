@@ -1,10 +1,10 @@
-// Traveller RPG Shopping DMs - based on Mongoose Traveller 2e - Central Supply Catalog Availability rules 
+// Traveller RPG GM "Aid" tools - based on Mongoose Traveller 2e - Central Supply Catalog Availability and Companion Law rules 
 //
 //  libraries and base code lifted from the great work by forthekill at: https://github.com/forthekill/travGenJS 
 //
-// Usage: !trav-shop --uwp B789430-C
+// Usage: !trav-aid --shop --uwp B789430-C
 //
-// Fist: B789430-C  Ni Ht
+// Fist: B789430-C  
 //
 // -----------------------------------  START ----------------------------
 //
@@ -24,17 +24,17 @@ function ts_hexToNum(n) {
 }
 
 on('ready', () => {
-    const version = '1.0.0'; // script version
-    log('-=> trav_shop v' + version + ' <=-');
+    const version = '1.1.0'; // script version
+    log('-=> trav_aid v' + version + ' <=-');
 
     // catch the invocation command (!SW-Dice )
     on('chat:message', function (msg) {
 
         // Only run when message is an api type and contains call to this script
-        if (msg.type === 'api' && msg.content.indexOf('!trav-shop') !== -1) {
+        if (msg.type === 'api' && msg.content.indexOf('!trav-aid') !== -1) {
+			//sendChat("trav-aid", "\nCmd Line: " + msg.content);
 
             let args = [];
-
             // clean up command line noise and split on "--"
             args = msg.content
                 .replace(/<br\/>\n/g, ' ')
@@ -42,25 +42,41 @@ on('ready', () => {
                 .split(/\s+--/);
 
             // bail out if api call is not to this script (tests cmd line cleaner)
-            if (args.shift() !== "!trav-shop") {
-                log('-=> trav-shop: command line parsing error - contact developer - exiting ... <=- ');
+            if (args.shift() !== "!trav-aid") {
+                log('-=> trav-aid: command line parsing error - contact developer - exiting ... <=- ');
                 return;
             }
 
             // After shifting out the api call args array should be
-            // [0] uwp B789430-C
+            // [0] = shop
             if (!(args[0])) {
-                sendChat("trav-shop", "\nUsage: !trav-shop --uwp B789430-C  (system uwp code)");
+                sendChat("trav-aid", "\nUsage: !trav-aid --shop --uwp B789430-C  (system uwp code)");
                 return;
             }
            
             // parse cmd line args
             let cmd_args = [];
-            cmd_args = args[0].split(/\s+/);
-            cmd_args.shift(); // drop switch name
-            let cmd_uwp = cmd_args[0]; // get switch value
+			let cmd_uwp = "";
+            let aid_command_name = args[0]; // get command name shop, law, ...
+			sendChat("trav-aid", "\nAid cmd name = " + aid_command_name);
+			args.shift(); // drop command name: args[0] = uwp B789430-C
+			sendChat("trav-aid", "\nremaining args = " + args[0]);
+            // let command_name = cmd_args.shift(); // drop command name: cmd_args [0] = uwp [1] = B789430-C
+            if (aid_command_name === 'shop') {
+				sendChat("trav-aid", "\ngot here " );
+				cmd_args = args[0].split(/\s+/);
+				sendChat("trav-aid", "\ncmd args[0] post split = " + cmd_args[0]);
+				cmd_args.shift(); // drop uwp switch
+				sendChat("trav-aid", "\ncmd args[0] post shift = " + cmd_args[0]);
+				cmd_uwp = cmd_args[0]; // get uwp value
+			}
+			else {
+				sendChat("trav-aid", "\nUsage: !trav-aid --shop --uwp B789430-C  (system uwp code) command name =" + command_name);
+				return;
+			}
+			sendChat("trav-aid", "\ncmd_uwp = " + cmd_uwp);
 
-            // parse uwp
+			// parse uwp
 			// let letter = text.charAt(1);
 			let stp = ts_hexToNum(cmd_uwp.charAt(0)); // Affects Availability
 			let siz = ts_hexToNum(cmd_uwp.charAt(1));
