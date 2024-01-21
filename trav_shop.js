@@ -58,23 +58,23 @@ on('ready', () => {
             let cmd_args = [];
 			let cmd_uwp = "";
             let aid_command_name = args[0]; // get command name shop, law, ...
-			sendChat("trav-aid", "\nAid cmd name = " + aid_command_name);
+			// sendChat("trav-aid", "\nAid cmd name = " + aid_command_name);
 			args.shift(); // drop command name: args[0] = uwp B789430-C
-			sendChat("trav-aid", "\nremaining args = " + args[0]);
+			// sendChat("trav-aid", "\nremaining args = " + args[0]);
             // let command_name = cmd_args.shift(); // drop command name: cmd_args [0] = uwp [1] = B789430-C
             if (aid_command_name === 'shop') {
-				sendChat("trav-aid", "\ngot here " );
+				// sendChat("trav-aid", "\ngot here " );
 				cmd_args = args[0].split(/\s+/);
-				sendChat("trav-aid", "\ncmd args[0] post split = " + cmd_args[0]);
+				// sendChat("trav-aid", "\ncmd args[0] post split = " + cmd_args[0]);
 				cmd_args.shift(); // drop uwp switch
-				sendChat("trav-aid", "\ncmd args[0] post shift = " + cmd_args[0]);
+				// sendChat("trav-aid", "\ncmd args[0] post shift = " + cmd_args[0]);
 				cmd_uwp = cmd_args[0]; // get uwp value
 			}
 			else {
 				sendChat("trav-aid", "\nUsage: !trav-aid --shop --uwp B789430-C  (system uwp code) command name =" + command_name);
 				return;
 			}
-			sendChat("trav-aid", "\ncmd_uwp = " + cmd_uwp);
+			// sendChat("trav-aid", "\ncmd_uwp = " + cmd_uwp);
 
 			// parse uwp
 			// let letter = text.charAt(1);
@@ -129,9 +129,7 @@ on('ready', () => {
 			if (atm === 0){ tc_va = true; } //x
 			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
 
-            // calculate the shopping DMs
-            let DM_gm_fiat  = -2;
-
+           
 			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
 			let DM_pop = 0;
 			if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
@@ -180,10 +178,12 @@ on('ready', () => {
 					'<td' + td_th_style + ' >Item<br>TL</td>' +
 					'<td' + td_th_style + ' >Civ<br>Crx1</td>' +
 					'<td' + td_th_style + ' >Mil<br>Crx1</td>' +
-					'<td' + td_th_style + ' >Civ<br>Crx2</td>' +
-					'<td' + td_th_style + ' >Mil<br>Crx5</td>' +
-					'<td' + td_th_style + ' >Pro<br>Crx20</td>' +
+					'<td' + td_th_style + ' >Civ<br>Cr<span style="color:red">x2</span></td>' +
+					'<td' + td_th_style + ' >Mil<br>Cr<span style="color:red">x5</span></td>' +
+					'<td' + td_th_style + ' >Pro<br>Cr<span style="color:red">x20</span></td>' +
 				'</tr>';
+			// calculate the shopping DMs
+			let DM_gm_fiat  = -2;
 			let tl_delta_item_world = 0;
 			let next_tl_delta_item_world = 0;
 			let DM_tl = 0;
@@ -212,13 +212,13 @@ on('ready', () => {
 				else if (next_tl_delta_item_world > 4){next_DM_tl = -3;} 
 				else if (next_tl_delta_item_world > 2){next_DM_tl = -2;} 
 				else if (next_tl_delta_item_world > 0){next_DM_tl = -1;} 
-	            // market and item type          0       -2         -1       1        0       0   // Fist: B789430-C  Ni Ht
-				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx1
-				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;  // Crx3
-				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx2 
-				DM_black_market_military      = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx5
-				DM_black_market_prohibited    = -6 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_law + DM_tl;  // Crx20
-				// log('-=> trav_shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
+	            // market and item type          0       -2         -1       1        0   0(upto 12)   -1    // Fist: B789435-C  Ni Ht
+				DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;            // Crx1
+				DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;            // Crx2
+				DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx2 
+				DM_black_market_military      =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx5
+				DM_black_market_prohibited    = -4 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx20
+				// log('-=> trav_aid shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
 
 				if (DM_tl !== next_DM_tl) {
 					if ( ! printed_DM_tl_0) {
@@ -272,21 +272,16 @@ on('ready', () => {
 			"</tr>";
 			html = html +  
 			'<tr>' +
-			'<td' + td_style + ' colspan="6">Pay 2x/3x = DM+1/+2; Uncommon = DM-1</td>' + 
+			'<td' + td_style + ' colspan="6"><span style="color:blue">After rolling, add DM+1/+2 if you are willing to pay 2x/3x</td>' + 
 			'</tr> ' +
 			'<tr>' +
-			'<td' + td_style + ' colspan="6">Use Black Market for Illegal Goods.</td>' + 
+			'<td' + td_style + ' colspan="6">May use <u><i>Black Market</u></i> to buy illegal goods. However, a Streetwise Effect of -2 or worse attacts Law Enforcement.</td>' + 
 			'</tr> ' +
 			'<tr>' +
-			'<td' + td_style + ' colspan="6">Black Market Streetwise Effect-2<br>or worse attacts Law Enforcement.</td>' + 
-			'</tr> ' +
-			'<tr>' +
-			'<td' + td_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</td>' + 
-			'</tr> ' +
-			'<tr>' +
-			'<td' + td_left_style + ' colspan="6"><b>Law Leved [' + law.toString()+ '] Banned (Cumulative):</b><br>' ;
+			'<td' + td_left_style + ' colspan="6"><div style="text-align: center;"><b>Law Leved [' + law.toString()+ '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market Military</u></i>)</div><hr style="border: 1px solid; margin: 1%;">' ;
+			
 			for (i = 0; i < law+1; i+=1) {
-				switch (i) {
+					switch (i) {
 					case 0:
 						html = html + '0 No restrictions, heavy armor and weapons recommended<br>'; 
 							break;
@@ -327,14 +322,15 @@ on('ready', () => {
 						html = html + 'C+(12+) Active monitoring for violations';  
 				  } // end switch
 				} // end for i
-			html = html + '</td>' + 
-			'</tr> ' +
+				html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor not on the list above is available via <u><i>Normal Market Military</u></i></div>' ;
+				html = html + '</td>' + 
+				'</tr> ' +
 			'</tbody>' + 
 			'</table>' + 
 			'</div>';
-			sendChat("trav-shop", "\n"+html);
+			sendChat("trav-aid shop", "\n"+html);
 
-		} // end if trav_shop
+		} // end if trav_aid
 
 	}); // end on chat message
 }); // end on ready
