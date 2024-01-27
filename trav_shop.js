@@ -173,7 +173,7 @@ on('ready', () => {
 					'<tr>' +
 						'<th' + th_style + ' >SHOP<br>DMs</th>' +
 						'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
-						'<th' + th_style + ' colspan="3">Black<br>Market<br>(Streetwise Only) </th>'+
+						'<th' + th_style + ' colspan="3">Black<br>Market<br>(Streetwise<br>Only) </th>'+
 					'</tr>' +
 				'</thead>' +
 				'<tbody>' +
@@ -367,7 +367,7 @@ on('ready', () => {
 						'<td' + th_gray_style + ' >The Ship</td>' +
 					'</tr>' +
 					'<tr>' +
-						'<td' + td_style + ' >On GM roll of <span style="color:red">' + customs_ship_check.toString() + '+</span></td>' +
+						'<td' + td_style + ' >On GM roll of <span style="color:red;font-weight: bold;">' + customs_ship_check.toString() + '+</span></td>' +
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_left_style + ' >Navy Base DM+1<br>Amber/Red DM+2/+4<br>Planetary War or Strife DM+1</td>' +
@@ -379,13 +379,13 @@ on('ready', () => {
 						'<td' + th_gray_style + ' >The Travellers</td>'+
 					'</tr>' +
 					'<tr>' +
-						'<td' + td_left_style + ' >Avoid Detection or Trouble with<br>Persuade(INT) or<br>Stealth(DEX) or Streetwise(INT)<br>check with <span style="color:red">DM' + DM_customs_tl.toString() + '</span></td>' +
+						'<td' + td_left_style + ' ><b>Avoid Detection or Trouble</b> with<br>Persuade(INT) or<br>Stealth(DEX) or Streetwise(INT)<br>check with <span style="color:red;font-weight:bold;">DM' + DM_customs_tl.toString() + '</span></td>' +
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_left_style + ' >Stealth Weapon DM+TL/2;<br>Disguised, Disassembled, or Concealed DM+2<br>Knife Sized DM+1 <br>Pistol/Handgun Sized DM-2<br>Long Gun Sized DM-4</td>' +
 					'</tr>' +
 					'<tr>' +
-						'<td' + td_left_style + ' >xxx  consequences of getting caught</td>' +
+						'<td' + td_left_style + ' ><b>Getting Caught:</b> Roll on Sentencing Table<br>2D - Advocate Effect + Difference of Planet Law Level(<span style="color:red;font-weight: bold;">'+ law.toString() +'</span>) and Law Level when item is first banned.</td>' +
 					'</tr>' +
 				'</table>' + 
 				'</div>';
@@ -395,6 +395,7 @@ on('ready', () => {
 
 	}); // end on chat message
 }); // end on ready
+
 
 ;
 
