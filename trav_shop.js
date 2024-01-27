@@ -156,6 +156,7 @@ on('ready', () => {
 			// Item’s TL is 5–9 above the World’s TL -2
 			// Item’s TL is 10 or more above the World’s TL -4			
 			let th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal"';
+			let th_gray_style = ' style="background-color:#E5E4E2;border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal"';
 			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
 			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nwrap;"';
 			let td_left_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:left;vertical-align:middle;word-break:normal;white-space:normal;"';
@@ -359,29 +360,33 @@ on('ready', () => {
 	
 				let html = '<div style="width: 99%; border: 1px solid black; background-color: white; padding: 1px 1px; ">' +
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
-				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan="2">System: ' + cmd_uwp  + '<br>CUSTOMS INSPECTIONS OF</th>' + 
+						'<td' + th_style + ' >System: ' + cmd_uwp  + '<br>CUSTOMS INSPECTIONS OF</td>' + 
 					'</tr> ' +
 					'<tr>' +
-						'<th' + th_style + ' >The Ship</th>' +
-						'<th' + th_style + ' >The<br>Travellers</th>'+
-					'</tr>' +
-				'</thead>' +
-				'<tbody>' +
-					'<tr>' +
-						'<td' + td_style + ' >On GM roll<br>of <span style="color:red">' + customs_ship_check.toString() + '+</span></td>' +
-						'<td' + td_style + ' >On Persuade(INT)<br>or Stealth(DEX) or<br>Streetwise(INT)<br> check with <span style="color:red">DM' + DM_customs_tl.toString() + '</span></td>' +
+						'<td' + th_gray_style + ' >The Ship</td>' +
 					'</tr>' +
 					'<tr>' +
-					'<td' + td_left_style + ' >Navy Base +1<br>Amber/Red +2/+4<br>Planet Strife +1</td>' +
-					'<td' + td_style + ' >Stealth Wpn DM+TL/2;<br>Disguised,<br>Disassembled<br>or Concealed DM+2<br>Knife DM+1 <br>Pistol/Handgun DM-2<br>Long Gun DM-4</td>' +
+						'<td' + td_style + ' >On GM roll of <span style="color:red">' + customs_ship_check.toString() + '+</span></td>' +
 					'</tr>' +
 					'<tr>' +
-					'<td' + td_left_style + ' ><b>Pull Rank</b> to prevent boarding party from inspecting the ship: Diplomat (SOC) opposed vs. Customs Officer Admin<br><b>Hide Something</b> from boarding party: Opposed Deception(DEX, INT or SOC depending on how skill is used) vs. Recon (INT).<br><b>Fast Talk</b> them out of reporting something they found: Opposed Persuade or Diplomat (SOC) vs. boarding party Leadership (SOC).</td>' +
-					'<td' + td_style + ' >consequences of getting caught</td>' +
+						'<td' + td_left_style + ' >Navy Base DM+1<br>Amber/Red DM+2/+4<br>Planetary War or Strife DM+1</td>' +
 					'</tr>' +
-				'</tbody>' + 
+					'<tr>' +
+						'<td' + td_left_style + ' ><b>Pull Rank</b> to prevent inspection of the ship: Diplomat (SOC) Opp by Customs Officer Admin<br><b>Hide Something</b> from boarding party: Opp Deception(DEX, INT or SOC depending on how skill is used) vs. Recon (INT).<br><b>Fast Talk</b> them out of reporting something they found: Opp Persuade or Diplomat (SOC) vs. boarding party Leadership (SOC).</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td' + th_gray_style + ' >The Travellers</td>'+
+					'</tr>' +
+					'<tr>' +
+						'<td' + td_left_style + ' >Avoid Detection or Trouble with<br>Persuade(INT) or<br>Stealth(DEX) or Streetwise(INT)<br>check with <span style="color:red">DM' + DM_customs_tl.toString() + '</span></td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td' + td_left_style + ' >Stealth Weapon DM+TL/2;<br>Disguised, Disassembled, or Concealed DM+2<br>Knife Sized DM+1 <br>Pistol/Handgun Sized DM-2<br>Long Gun Sized DM-4</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td' + td_left_style + ' >xxx  consequences of getting caught</td>' +
+					'</tr>' +
 				'</table>' + 
 				'</div>';
 				sendChat("trav-aid customs", "\n"+html);
