@@ -168,22 +168,22 @@ on('ready', () => {
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan="6"><b>System:</b> ' + cmd_uwp  + '</th>' + 
+						'<th' + th_style + ' colspan="5"><b>System:</b> ' + cmd_uwp  + '</th>' + 
 					'</tr> ' +
 					'<tr>' +
 						'<th' + th_style + ' >SHOP<br>DMs</th>' +
-						'<th' + th_style + ' colspan="2">Normal<br>Market (Broker or Streetwise)</th>' +
-						'<th' + th_style + ' colspan="3">Black<br>Market<br>(Streetwise<br>Only) </th>'+
+						'<th' + th_style + ' colspan="2">Normal Market (Broker or Streetwise)</th>' +
+						'<th' + th_style + ' colspan="2">Black Market<br>(Streetwise Only) </th>'+
 					'</tr>' +
 				'</thead>' +
 				'<tbody>' +
 					'<tr>' +
 						'<td' + td_th_style + ' >Item<br>TL</td>' +
-						'<td' + td_th_style + ' >Civ<br>Crx1</td>' +
-						'<td' + td_th_style + ' >Mil<br>Crx1</td>' +
-						'<td' + td_th_style + ' >Civ<br>Cr<span style="color:red">x2</span></td>' +
-						'<td' + td_th_style + ' >Mil<br>Cr<span style="color:red">x5</span></td>' +
-						'<td' + td_th_style + ' >Pro<br>Cr<span style="color:red">x20</span></td>' +
+						'<td' + td_th_style + ' >Easy<br>Crx1</td>' +
+						'<td' + td_th_style + ' >Hard<br>Crx1</td>' +
+						'<td' + td_th_style + ' >Easy<br>Cr<span style="color:red">x2</span></td>' +
+						'<td' + td_th_style + ' >Hard<br>Cr<span style="color:red">x5</span></td>' +
+					//	'<td' + td_th_style + ' >Pro<br>Cr<span style="color:red">x20</span></td>' +
 					'</tr>';
 				// calculate the shopping DMs
 				let DM_gm_fiat  = -2;
@@ -231,7 +231,7 @@ on('ready', () => {
 							"<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
 							"<td" + td_style + " >" + DM_black_market_non_military  + "</td>"  +
 							"<td" + td_style + " >" + DM_black_market_military      + "</td>"  +
-							"<td" + td_style + " >" + DM_black_market_prohibited    + "</td>"  +
+							// "<td" + td_style + " >" + DM_black_market_prohibited    + "</td>"  +
 							"</tr>";
 						}
 						else {
@@ -241,7 +241,7 @@ on('ready', () => {
 							"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
 							"<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
 							"<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
-							"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+							// "<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
 							"</tr>";
 						}
 					}
@@ -271,17 +271,17 @@ on('ready', () => {
 				"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
 				"<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
 				"<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
-				"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+				//"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
 				"</tr>";
 				html = html +  
 				'<tr>' +
-				'<td' + td_style + ' colspan="6"><span style="color:blue">After rolling, add DM+1/+2 if you are willing to pay 2x/3x</td>' + 
+				'<td' + td_style + ' colspan="5"><span style="color:blue">After rolling, add DM+1/+2 if you are willing to pay 2x/3x</td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan="6">May use <u><i>Black Market</u></i> to buy illegal goods. However, a Streetwise Effect of -2 or worse attacts Law Enforcement.</td>' + 
+				'<td' + td_style + ' colspan="5">Use <u><i>Black Market</u></i> for illegal goods. Streetwise Effect,-1 attacts the Law </td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_left_style + ' colspan="6"><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market Military</u></i>)</div><hr style="border: 1px solid; margin: 1%;">' ;
+				'<td' + td_left_style + ' colspan="5"><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market Hard</u></i>)</div><hr style="border: 1px solid; margin: 1%;">' ;
 				
 				for (i = 0; i < law+1; i+=1) {
 					switch (i) {
@@ -289,34 +289,34 @@ on('ready', () => {
 							html = html + '0 No restrictions, heavy armor and weapons recommended<br>'; 
 							break;
 						case 1:
-							html = html + '1 Poison gas, explosives, undetectable weapons, WMD; Battle Dress<br>';
+							html = html + '1 Poison gas, explosives and grenades, undetectable weapons, WMD; Battle Dress<br>';
 							break;
 						case 2:
 							html = html + '2 Portable energy and laser weapons; Combat Armor<br>';
 							break;
 						case 3:
-							html = html + '3 Military weapons, all portable heavy weapons; Flak and Obvious Armor<br>';
+							html = html + '3 Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with the Destructive trait; Flak and Obvious Armor<br>';
 							break;
 						case 4:
-							html = html + '4 Light assault weapons and submachine guns, all automatic weapons; Cloth Armor<br>';
+							html = html + '4 Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with the Auto trait; Cloth Armor<br>';
 							break;
 						case 5:
-							html = html + '5 Personal concealable ranged weapons, pistols, revolvers; Mesh Armor<br>';
+							html = html + '5 Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; Mesh Armor<br>';
 							break;
 						case 6:
-							html = html + '6 All firearms except shotguns & stunners; carrying weapons and armor discouraged<br>';
+							html = html + '6 All firearms except shotguns and stunners; carrying weapons and armor discouraged<br>';
 							break;
 						case 7:
-							html = html + '7 Shotguns and all other ranged firearms<br>'; 
+							html = html + '7 Shotguns and all other firearms<br>'; 
 							break;
 						case 8:
-							html = html + '8 All bladeds, stunners; All visible armor<br>';
+							html = html + '8 All bladeds and stunners; All visible armor<br>';
 							break;
 						case 9:
 							html = html + '9 All weapons; All armor<br>'; 
 							break;
 						case 10:
-							html = html + 'A(10) All violations are Serious crimes<br>';
+							html = html + 'A(10) All violations are serious crimes<br>';
 							break;
 						case 11:
 							html = html + 'B(11) Random weapon violation sweeps<br>';
@@ -325,8 +325,12 @@ on('ready', () => {
 							html = html + 'C+(12+) Active monitoring for violations';  
 					} // end switch
 				} // end for i
-				html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor not on the list above is available via <u><i>Normal Market Military</u></i></div>' ;
+				html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor/Ammo not on the list above is available via <u><i>Normal Market Hard</u></i></div>' ;
 				html = html + '</td>' + 
+				'</tr> ' +
+				'<tr>' +
+				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to find:<br>Computers, Software, Electronics, Medical Gear, Standard Ammo, Survival Gear, Tools</td>' + 
+				'<td' + td_style + ' colspan="3">Always <span style="color:red;font-weight: bold;">Hard</span> to find:<br> Armor, Armor Mods, Augments, Explosives, Grenades, Pharmaceuticals, Robots, Shields, Special Ammo, Weapons(Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
