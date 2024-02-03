@@ -52,14 +52,15 @@ on('ready', () => {
             // After shifting out the api call args array should be
             // [0] = shop
             if (!(args[0])) {
-                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code)");
+                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) --name (system name)");
                 return;
             }
            
             // parse cmd line args
             let cmd_args = [];
 			let cmd_uwp = "";
-            let aid_command_name = args[0]; // get command name shop, law, ...
+			let cmd_name = "";
+            let aid_command_name = args[0]; // get command name shop, custome, ...
 			args.shift(); // drop command name: args[0] = uwp B789430-C
 			cmd_args = args[0].split(/\s+/);
 			// sendChat("trav-aid", "\ncmd args[0] post split = " + cmd_args[0]);
@@ -67,9 +68,17 @@ on('ready', () => {
 			// sendChat("trav-aid", "\ncmd args[0] post shift = " + cmd_args[0]);
             if (aid_command_name === 'shop') {
 				cmd_uwp = cmd_args[0]; // get uwp value
+				args.shift(); // drop command name: args[0] = name pandora
+			    cmd_args = args[0].split(/\s+/);
+			    cmd_args.shift(); // drop name switch
+				cmd_name = cmd_args[0]; // get name value
 			}
             else if (aid_command_name === 'customs') {
 				cmd_uwp = cmd_args[0]; // get uwp value
+				args.shift(); // drop command name: args[0] = name pandora
+			    cmd_args = args[0].split(/\s+/);
+			    cmd_args.shift(); // drop name switch
+				cmd_name = cmd_args[0]; // get name value
 			}
 			else {
 				sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) command name =" + aid_command_name);
@@ -221,7 +230,7 @@ on('ready', () => {
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan="5"><b>Shopping in System:</b> ' + cmd_uwp  + ' (3 Rolls) </th>' + 
+						'<th' + th_style + ' colspan="5"><b>Shopping in:</b> ' + cmd_name + "<br>UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
 					'</tr> ' +
 					'<tr>' +
 					'<td' + td_style + ' colspan="5"><span style="color:blue">Hire a Shopper with Broker 0 for Cr200 or Streetwise 0 for Cr500</span></td>' + 
@@ -421,7 +430,7 @@ on('ready', () => {
 				html = '<div style="width: 99%; border: 1px solid black; background-color: white; padding: 1px 1px; ">' +
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 					'<tr>' +
-						'<td' + th_style + ' >System: ' + cmd_uwp  + '<br>CUSTOMS INSPECTIONS OF</td>' + 
+						'<td' + th_style + ' >System: ' + cmd_name + "<br>UWP: " + cmd_uwp  + '<br>CUSTOMS INSPECTIONS OF</td>' + 
 					'</tr> ' +
 					'<tr>' +
 						'<td' + th_gray_style + ' >The Ship</td>' +
