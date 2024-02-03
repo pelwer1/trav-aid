@@ -52,7 +52,7 @@ on('ready', () => {
             // After shifting out the api call args array should be
             // [0] = shop
             if (!(args[0])) {
-                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) --name (system name)");
+                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R");
                 return;
             }
            
@@ -60,6 +60,11 @@ on('ready', () => {
             let cmd_args = [];
 			let cmd_uwp = "";
 			let cmd_name = "";
+			let cmd_bases = "";
+			let naval_base_present = false;
+			let zone_amber = false;
+			let zone_red = false;
+			let cmd_zone = "";
             let aid_command_name = args[0]; // get command name shop, custome, ...
 			args.shift(); // drop command name: args[0] = uwp B789430-C
 			cmd_args = args[0].split(/\s+/);
@@ -79,9 +84,28 @@ on('ready', () => {
 			    cmd_args = args[0].split(/\s+/);
 			    cmd_args.shift(); // drop name switch
 				cmd_name = cmd_args[0]; // get name value
+				args.shift(); // drop command name: args[0] = name pandora
+			    cmd_args = args[0].split(/\s+/);
+			    cmd_args.shift(); // drop name switch
+				cmd_bases = cmd_args[0]; // get name value
+                // looking for Naval bases 
+				if (cmd_bases.indexOf("D") > -1 || cmd_bases.indexOf("K") > -1 || cmd_bases.indexOf("N") > -1 || cmd_bases.indexOf("T") > -1 || cmd_bases.indexOf("C") > -1 || cmd_bases.indexOf("R") > -1 ) {
+					naval_base_present = true;
+				}
+				args.shift(); // drop command name: args[0] = name pandora
+			    cmd_args = args[0].split(/\s+/);
+			    cmd_args.shift(); // drop name switch
+				cmd_zone = cmd_args[0]; // get name value
+                // looking for dangerous travel zones 
+				if (cmd_zone.indexOf("A") > -1 ) {
+					zone_amber=true;
+				}
+				if (cmd_zone.indexOf("R") > -1 ) {
+					zone_red=true;
+				}
 			}
 			else {
-				sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) command name =" + aid_command_name);
+				sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R  Your command name =" + aid_command_name);
 				return;
 			}
 			// sendChat("trav-aid", "\ncmd_uwp = " + cmd_uwp);
@@ -411,10 +435,12 @@ on('ready', () => {
 				// Red Zone 		DM+4 
 				// War, Strife, Disease… 	DM+1
 
-				let DM_customs_pop = 0
-				let DM_customs_law = 0
-				let DM_customs_gov = 0
-				let DM_customs_tl = -1 * tl 
+				let DM_customs_pop = 0;
+				let DM_customs_law = 0;
+				let DM_customs_gov = 0;
+				let DM_naval_base = 0;
+				let DM_zone = 0;
+				let DM_customs_tl = -1 * tl; 
 
 				// Population 5- 		DM-2
 				if (pop < 6) {DM_customs_pop = -2;} 
@@ -425,7 +451,11 @@ on('ready', () => {
 				// Government 7 or A+ 	DM+1 
 				if (gov === 7 || gov > 9) { DM_customs_gov = 1; } 
 
-				let customs_ship_check =  8 + DM_customs_pop + DM_customs_law + DM_customs_gov
+				if (naval_base_present) {DM_naval_base = -1;}
+				if (zone_amber) {DM_zone = -2;} else if (zone_red) {DM_zone = -4;}
+
+
+				let customs_ship_check =  8 + DM_customs_pop + DM_customs_law + DM_customs_gov+ DM_naval_base + DM_zone
 	
 				html = '<div style="width: 99%; border: 1px solid black; background-color: white; padding: 1px 1px; ">' +
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
@@ -437,9 +467,6 @@ on('ready', () => {
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_style + ' >On GM roll of <span style="color:red;font-weight: bold;">' + customs_ship_check.toString() + '+</span></td>' +
-					'</tr>' +
-					'<tr>' +
-						'<td' + td_left_style + ' >Navy Base DM+1<br>Amber/Red DM+2/+4<br>Planetary War or Strife DM+1</td>' +
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_left_style + ' ><b>Pull Rank</b> to prevent inspection of the ship: Diplomat (SOC) Opp by Customs Officer Admin<br><b>Hide Something</b> from boarding party: Opp Deception(DEX, INT or SOC depending on how skill is used) vs. Recon (INT).<br><b>Fast Talk</b> them out of reporting something they found: Opp Persuade or Diplomat (SOC) vs. boarding party Leadership (SOC).</td>' +
