@@ -261,8 +261,8 @@ on('ready', () => {
 					'</tr> ' +
 						'<tr>' +
 						'<th' + th_style + ' >SHOP<br>DMs</th>' +
-						'<th' + th_style + ' colspan="2">Normal Market (Broker or Streetwise)</th>' +
-						'<th' + th_style + ' colspan="2">Black Market<br>(Streetwise Only) </th>'+
+						'<th' + th_style + ' colspan="2">Normal Market (Admin, Broker or Streetwise)</th>' +
+						'<th' + th_style + ' colspan="2">Black Market<br>(Deception or Streetwise) </th>'+
 					'</tr>' +
 				'</thead>' +
 				'<tbody>' +
@@ -367,16 +367,16 @@ on('ready', () => {
 				'<td' + td_style + ' colspan="5"><span style="color:blue">After rolling, add DM+1/+2 if you pay 2x/3x</span></td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan="5">Use <u><i>Black Market</u></i> for illegal goods. Streetwise Effect < -1 attacts the Law </td>' + 
+				'<td' + td_style + ' colspan="5">Use <u><i>Black Market</u></i> for illegal goods. Streetwise/Deception Effect < -1 attacts the Law </td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_left_style + ' colspan="5"><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
+				'<td' + td_left_style + ' colspan="5"><div style="text-align: center;"><b>Law Level [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
 				
 
 				html =  html + html_banned +
 				'<tr>' +
-				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to find: Tools, Computers, Software, Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + ' colspan="3">Always <span style="color:red;font-weight: bold;">Hard</span> to find: Armor, Armor Mods, Augments, Explosives, Grenades, Pharmaceuticals, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'<td' + td_style + ' colspan="3">Always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Explosives, Grenades, Pharmaceuticals, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
@@ -385,11 +385,6 @@ on('ready', () => {
 			} // end if --shop
 			if (aid_command_name === 'customs') {
 
-
-
-				// Naval Base present 	DM+1 
-				// Amber Zone 		DM+2 
-				// Red Zone 		DM+4 
 				// War, Strife, Disease… 	DM+1
 
 				let DM_customs_pop = 0;
