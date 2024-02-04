@@ -372,50 +372,7 @@ on('ready', () => {
 				'<tr>' +
 				'<td' + td_left_style + ' colspan="5"><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
 				
-				// for (i = 0; i < law+1; i+=1) {
-				// 	switch (i) {
-				// 		case 0:
-				// 			html = html + '<b>0</b> No restrictions, heavy armor and weapons recommended<br>'; 
-				// 			break;
-				// 		case 1:
-				// 			html = html + '<b>1</b> Poison gas, explosives and grenades, undetectable weapons, WMD; Battle Dress<br>';
-				// 			break;
-				// 		case 2:
-				// 			html = html + '<b>2</b> Portable energy and laser weapons; Combat Armor<br>';
-				// 			break;
-				// 		case 3:
-				// 			html = html + '<b>3</b> Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with Destructive trait; Flak and Obvious Armor<br>';
-				// 			break;
-				// 		case 4:
-				// 			html = html + '<b>4</b> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; Cloth Armor<br>';
-				// 			break;
-				// 		case 5:
-				// 			html = html + '<b>5</b> Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; Mesh Armor<br>';
-				// 			break;
-				// 		case 6:
-				// 			html = html + '<b>6</b> All firearms except shotguns and stunners; carrying weapons and armor discouraged<br>';
-				// 			break;
-				// 		case 7:
-				// 			html = html + '<b>7</b> Shotguns and all other firearms<br>'; 
-				// 			break;
-				// 		case 8:
-				// 			html = html + '<b>8</b> All bladeds and stunners; All visible armor<br>';
-				// 			break;
-				// 		case 9:
-				// 			html = html + '<b>9</b> All weapons; All armor<br>'; 
-				// 			break;
-				// 		case 10:
-				// 			html = html + '<b>A(10)</b> All violations are serious crimes<br>';
-				// 			break;
-				// 		case 11:
-				// 			html = html + '<b>B(11)</b> Random weapon violation sweeps<br>';
-				// 			break;
-				// 		case 12:
-				// 			html = html + '<b>C+(12+)</b> Active monitoring for violations';  
-				// 	} // end switch
-				// } // end for i
-				// html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor/Ammo not on the list above is available via <u><i>Normal Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> </div>' ;
-				// html = html + '</td>' + '</tr> ';
+
 				html =  html + html_banned +
 				'<tr>' +
 				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to find: Tools, Computers, Software, Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
