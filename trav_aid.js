@@ -52,7 +52,7 @@ on('ready', () => {
             // After shifting out the api call args array should be
             // [0] = shop
             if (!(args[0])) {
-                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R");
+                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs|trade --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R");
                 return;
             }
            
@@ -77,6 +77,9 @@ on('ready', () => {
 			    cmd_args = args[0].split(/\s+/);
 			    cmd_args.shift(); // drop name switch
 				cmd_name = cmd_args[0]; // get name value
+			}
+            else if (aid_command_name === 'trade') {
+				cmd_uwp = cmd_args[0]; // get uwp value
 			}
             else if (aid_command_name === 'customs') {
 				cmd_uwp = cmd_args[0]; // get uwp value
@@ -163,7 +166,28 @@ on('ready', () => {
 			if (atm === 0){ tc_va = true; } //x
 			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
 
-           
+
+            // human readable trade codes
+			let trade_codes_out = "";
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ag" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " As" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ba" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " De" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Fl" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ga" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " He" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Hi" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ht" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ic" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Lo" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Lt" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Na" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ni" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Po" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Ri" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Va" }
+			if (tc_ag) {trade_codes_out = trade_codes_out + " Wa" }
+	   
 			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
 			let DM_pop = 0;
 			if (pop < 3) {DM_pop = -2;} else if (pop < 6) { DM_pop = -1; } else if (pop === 9) { DM_pop = 1; } else if (pop > 9) { DM_pop = 2; }
