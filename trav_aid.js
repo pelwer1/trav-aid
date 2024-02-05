@@ -409,7 +409,7 @@ on('ready', () => {
 
 				if (naval_base_present) {DM_naval_base = -1;}
 				if (zone_amber) {DM_zone = -2;} else if (zone_red) {DM_zone = -4;}
-
+  
 
 				let customs_ship_check =  8 + DM_customs_pop + DM_customs_law + DM_customs_gov+ DM_naval_base + DM_zone
 	
