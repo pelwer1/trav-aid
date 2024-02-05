@@ -146,47 +146,27 @@ on('ready', () => {
           	let tc_wa = false; //x Water World  Siz 3-9, Atm 3-9, Hyd A
           
           	// determine trade codes from uwp values
-			if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; } //x
-			if (siz === 0 && atm === 0 && hyd === 0){ tc_as = true; } //x
-			if (pop === 0 && gov === 0 && law === 0) { tc_ba = true; } //x
-			if (hyd === 0 && (atm > 1 && atm < 10)) { tc_de = true; } //x
-			if (hyd > 0 && atm > 9) { tc_fl = true; } //x
-			if ((siz > 5 && siz < 9 ) && (atm === 5 || atm === 6 || atm === 8) && (hyd > 4 && hyd < 8)) { tc_ga = true; } //x
-			if ((siz > 2 ) && (atm === 2 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && (hyd < 3)) { tc_he = true; } //x
-			if (pop > 8) { tc_hi = true; } //x
-			if (tl > 11) { tc_ht = true; } //x
-			if (atm < 2 && hyd > 0) { tc_ic = true; } //x
-			if ((atm < 3 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && pop > 8) { tc_in = true; } //x
-			if (pop < 4) { tc_lo = true; } //x
-			if (tl < 6) { tc_lt = true; } //x
-			if (atm < 4 && hyd < 4 && pop > 5) { tc_na = true; } //x
-			if (pop > 3 && pop < 7) { tc_ni = true; } //x
-			if ((atm > 1 && atm < 6) && hyd < 4) { tc_po = true; } //x
-			if ((atm === 6 || atm === 8) && (pop > 5 && pop < 9) && (gov > 3 && gov < 10)){ tc_ri = true; } //x
-			if (atm === 0){ tc_va = true; } //x
-			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; } //x
+			let tc_out = "";  // human readable string of space separated trade codes
+			if ((atm > 3 && atm < 10) && (hyd > 3 && hyd < 9) && (pop > 4 && pop < 8)){	tc_ag = true; tc_out = tc_out + " Ag";  } //x
+			if (siz === 0 && atm === 0 && hyd === 0){ tc_as = true; tc_out = tc_out + " As"; } //x
+			if (pop === 0 && gov === 0 && law === 0) { tc_ba = true; tc_out = tc_out + " Ba"; } //x
+			if (hyd === 0 && (atm > 1 && atm < 10)) { tc_de = true; tc_out = tc_out + " De"; } //x
+			if (hyd > 0 && atm > 9) { tc_fl = true; tc_out = tc_out + " Fl"; } //x
+			if ((siz > 5 && siz < 9 ) && (atm === 5 || atm === 6 || atm === 8) && (hyd > 4 && hyd < 8)) { tc_ga = true; tc_out = tc_out + " Ga"; } //x
+			if ((siz > 2 ) && (atm === 2 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && (hyd < 3)) { tc_he = true; tc_out = tc_out + " He"; } //x
+			if (pop > 8) { tc_hi = true; tc_out = tc_out + " Hi"; } //x
+			if (tl > 11) { tc_ht = true; tc_out = tc_out + " Ht"; } //x
+			if (atm < 2 && hyd > 0) { tc_ic = true; tc_out = tc_out + " Ic"; } //x
+			if ((atm < 3 || atm === 4 || atm === 7 || (atm > 8 && atm < 13)) && pop > 8) { tc_in = true; tc_out = tc_out + " In"; } //x
+			if (pop < 4) { tc_lo = true; tc_out = tc_out + " Lo"; } //x
+			if (tl < 6) { tc_lt = true; tc_out = tc_out + " Lt"; } //x
+			if (atm < 4 && hyd < 4 && pop > 5) { tc_na = true; tc_out = tc_out + " Na"; } //x
+			if (pop > 3 && pop < 7) { tc_ni = true; tc_out = tc_out + " Ni"; } //x
+			if ((atm > 1 && atm < 6) && hyd < 4) { tc_po = true; tc_out = tc_out + " Po"; } //x
+			if ((atm === 6 || atm === 8) && (pop > 5 && pop < 9) && (gov > 3 && gov < 10)){ tc_ri = true; tc_out = tc_out + " Ri"; } //x
+			if (atm === 0){ tc_va = true; tc_out = tc_out + " Va"; } //x
+			if (((atm > 2 && atm < 10)  || atm > 12 ) && hyd > 9) { tc_wa = true; tc_out = tc_out + " Wa"; } //x
 
-
-            // human readable trade codes
-			let trade_codes_out = "";
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ag" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " As" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ba" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " De" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Fl" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ga" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " He" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Hi" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ht" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ic" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Lo" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Lt" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Na" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ni" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Po" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Ri" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Va" }
-			if (tc_ag) {trade_codes_out = trade_codes_out + " Wa" }
 	   
 			// World Population 1–2 -2;  3–5 -1;  9 +1,  10+ +2
 			let DM_pop = 0;
@@ -465,6 +445,9 @@ on('ready', () => {
 				'</table>' + 
 				'</div>';
 				sendChat("trav-aid customs", "\n"+html);
+			} // end if customs
+			if (aid_command_name === 'trade') {
+				sendChat("trav-aid trade", "\n"+cmd_uwp+tc_out);
 			}
 		} // end if trav_aid
 
