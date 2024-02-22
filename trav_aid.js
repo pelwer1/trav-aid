@@ -213,13 +213,13 @@ on('ready', () => {
 						html = html + '<b>1</b> Poison gas, explosives and grenades, undetectable weapons, WMD; Battle Dress<br>';
 						break;
 					case 2:
-						html = html + '<b>2</b> Portable energy and laser weapons; Combat Armor; Non-Military Drugs: Anagathic, Psi, Recreational<br>';
+						html = html + '<b>2</b> Portable energy and laser weapons; Combat Armor; Medicinal Drugs: Anagathic, Psi, Recreational<br>';
 						break;
 					case 3:
 						html = html + '<b>3</b> Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with Destructive trait; Flak and Obvious Armor<br>';
 						break;
 					case 4:
-						html = html + '<b>4</b> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; Cloth Armor; Military Drugs: Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, Nervous Dampener<br>';
+						html = html + '<b>4</b> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; Cloth Armor; Combat Drugs: Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, Nervous Dampener<br>';
 						break;
 					case 5:
 						html = html + '<b>5</b> Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; Mesh Armor<br>';
@@ -228,7 +228,7 @@ on('ready', () => {
 						html = html + '<b>6</b> All firearms except shotguns and stunners; carrying weapons and armor discouraged<br>';
 						break;
 					case 7:
-						html = html + '<b>7</b> Shotguns and all other firearms; Military Drugs: Starlight Drop, Stim, Fast, Truth Serum<br>'; 
+						html = html + '<b>7</b> Shotguns and all other firearms; Combat Drugs: Starlight Drop, Stim, Fast, Truth Serum<br>'; 
 						break;
 					case 8:
 						html = html + '<b>8</b> All blades and stunners; All visible armor<br>';
@@ -237,20 +237,31 @@ on('ready', () => {
 						html = html + '<b>9</b> All weapons; All armor<br>'; 
 						break;
 					case 10:
-						html = html + '<b>A(10)</b> All violations are serious crimes; Non-Military Drugs: Anti-Rad, G-Tol, Psi-Inhib/Null, Rad Emergency, Slow<br>';
+						html = html + '<b>A(10)</b> All violations are serious crimes; Medicinal Drugs: Anti-Rad, G-Tol, Psi-Inhib/Null, Rad Emergency, Slow<br>';
 						break;
 					case 11:
 						html = html + '<b>B(11)</b> Random weapon violation sweeps; All Drugs are controlled substances (including Medicinal and Panacea) <br>';
 						break;
+					case 12:
+						html = html + '<b>C(12)</b> Active monitoring for violations<br>';  
+						break;
+					case 13:
+						html = html + '<b>D(13)</b> Paramilitary law enforcement, thought crimes prosecuted<br>';  
+						break;
+					case 14:
+						html = html + '<b>E(14)</b> Full police state, arbitrary executions or disappearances<br>';  
+						break;
+					case 15:
+						html = html + '<b>F(15)</b> Rigid control of daily life, gulag state<br>';  
+						break;
+					case 16:
+						html = html + '<b>G(16)</b> Thoughts controlled, disproportionate punishments<br>';  
+						break;
+					case 17:
+						html = html + '<b>H(17)</b> Legalized oppression<br>';  
+						break;											
 					default:
-						html = html + '<b>C+(12+)</b> Active monitoring for violations<br>';  
-						// D Paramilitary law enforcement, thought crimes prosecuted
-						// E Full police state, arbitrary executions or disappearances
-						// F Rigid control of daily life, gulag state
-						// G Thoughts controlled, disproportionate punishments
-						// H Legalized oppression
-						// J Routine oppression
-
+						html = html + '<b>J+(18+)</b> Routine oppression<br>';  
 					} // end switch
 			} // end for i
 			html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor/Ammo not on the list above is available via <u><i>Normal Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> </div>' ;
@@ -389,8 +400,8 @@ on('ready', () => {
 
 				html =  html + html_banned +
 				'<tr>' +
-				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Non-Military), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + ' colspan="3">Always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Military), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + ' colspan="2">Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'<td' + td_style + ' colspan="3">Always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
