@@ -210,37 +210,37 @@ on('ready', () => {
 						html = html + '<b>0</b> No restrictions, heavy armor and weapons recommended<br>'; 
 						break;
 					case 1:
-						html = html + '<b>1</b> Poison gas, explosives and grenades, undetectable weapons, WMD; Battle Dress<br>';
+						html = html + '<b>1</b> <u>Weapons:</u> Poison gas, explosives and grenades, undetectable weapons, WMD; <u>Armor:</u> Battle Dress<br>';
 						break;
 					case 2:
-						html = html + '<b>2</b> Portable energy and laser weapons; Combat Armor; Medicinal Drugs: Anagathic, Psi, Recreational<br>';
+						html = html + '<b>2</b> <u>Weapons:</u> Portable energy and laser weapons; <u>Armor:</u> Combat Armor; <u>Medicinal Drugs:</u> Anagathic, Recreational<br>';
 						break;
 					case 3:
-						html = html + '<b>3</b> Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with Destructive trait; Flak and Obvious Armor<br>';
+						html = html + '<b>3</b> <u>Weapons:</u> Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with Destructive trait; <u>Armor:</u> Flak and Obvious Armor<br>';
 						break;
 					case 4:
-						html = html + '<b>4</b> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; Cloth Armor; Combat Drugs: Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, Nervous Dampener<br>';
+						html = html + '<b>4</b> <u>Weapons:</u> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; <u>Armor:</u> Cloth Armor; <u>Combat Drugs:</u> Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, Nervous Dampener, Psi<br>';
 						break;
 					case 5:
-						html = html + '<b>5</b> Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; Mesh Armor<br>';
+						html = html + '<b>5</b> <u>Weapons:</u> Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; <u>Armor:</u> Mesh Armor<br>';
 						break;
 					case 6:
-						html = html + '<b>6</b> All firearms except shotguns and stunners; carrying weapons and armor discouraged<br>';
+						html = html + '<b>6</b> <u>Weapons:</u> All firearms except shotguns and stunners and carrying weapons discouraged; <u>Armor:</u> Wearing armor is discouraged<br>';
 						break;
 					case 7:
-						html = html + '<b>7</b> Shotguns and all other firearms; Combat Drugs: Starlight Drop, Stim, Fast, Truth Serum<br>'; 
+						html = html + '<b>7</b> <u>Weapons:</u> Shotguns and all other firearms; <u>Combat Drugs:</u> Starlight Drop, Stim, Fast, Truth Serum<br>'; 
 						break;
 					case 8:
-						html = html + '<b>8</b> All blades and stunners; All visible armor<br>';
+						html = html + '<b>8</b> <u>Weapons:</u> All blades and stunners; <u>Armor:</u> All visible armor<br>';
 						break;
 					case 9:
 						html = html + '<b>9</b> All weapons; All armor<br>'; 
 						break;
 					case 10:
-						html = html + '<b>A(10)</b> All violations are serious crimes; Medicinal Drugs: Anti-Rad, G-Tol, Psi-Inhib/Null, Rad Emergency, Slow<br>';
+						html = html + '<b>A(10)</b> All violations are serious crimes; <u>Medicinal Drugs:</u> G-Tol, Psi-Inhib/Null, Slow<br>';
 						break;
 					case 11:
-						html = html + '<b>B(11)</b> Random weapon violation sweeps; All Drugs are controlled substances (including Medicinal and Panacea) <br>';
+						html = html + '<b>B(11)</b> Random weapon violation sweeps; All Drugs are controlled substances (including Anti-Rad, Medicinal, Panacea, Rad Emergency) <br>';
 						break;
 					case 12:
 						html = html + '<b>C(12)</b> Active monitoring for violations<br>';  
