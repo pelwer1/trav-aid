@@ -52,7 +52,7 @@ on('ready', () => {
             // After shifting out the api call args array should be
             // [0] = shop
             if (!(args[0])) {
-                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs|trade --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R");
+                sendChat("trav-aid", "\nUsage: !trav-aid --shop|customs|trade|buyItem --uwp B789430-C  (system uwp code) --name (system name) --bases string --zone G|A|R");
                 return;
             }
            
@@ -61,16 +61,21 @@ on('ready', () => {
 			let cmd_uwp = "";
 			let cmd_name = "";
 			let cmd_bases = "";
+			let cmd_itemTL = "";
+			let cmd_diifficulty = "";
+			let cmd_legality = "";
+			
 			let naval_base_present = false;
 			let zone_amber = false;
 			let zone_red = false;
 			let cmd_zone = "";
-            let aid_command_name = args[0]; // get command name shop, custome, ...
-			args.shift(); // drop command name: args[0] = uwp B789430-C
-			cmd_args = args[0].split(/\s+/);
+            let aid_command_name = args[0]; // get command name shop, customs, ...
+			args.shift(); // drop shop|trade|customs|... switch - now  args[0] = uwp B789430-C
+			cmd_args = args[0].split(/\s+/);  // cmd_args[0] = uwp, [1] = B789430-C
 			// sendChat("trav-aid", "\ncmd args[0] post split = " + cmd_args[0]);
 			cmd_args.shift(); // drop uwp switch
 			// sendChat("trav-aid", "\ncmd args[0] post shift = " + cmd_args[0]);
+			//! trav-aid --shop --uwp B789439-C --name test
             if (aid_command_name === 'shop') {
 				cmd_uwp = cmd_args[0]; // get uwp value
 				args.shift(); // drop command name: args[0] = name pandora
@@ -78,6 +83,23 @@ on('ready', () => {
 			    cmd_args.shift(); // drop name switch
 				cmd_name = cmd_args[0]; // get name value
 			}
+			// !trav-aid --buyItem --uwp B789430-C --itemTL 0-15 --difficulty easy|hard --legality legal|banned
+            else if (aid_command_name === 'buyItem') {
+				cmd_uwp = cmd_args[0]; // get uwp value
+				args.shift(); // args[0] = itemTL 10
+			    cmd_args = args[0].split(/\s+/);  // cmd_args[0] = itemTL [1] = 10
+			    cmd_args.shift(); // drop itemTL switch
+				cmd_itemTL = cmd_args[0]; // get itemTL value
+				args.shift(); // args[0] = difficulty easy
+			    cmd_args = args[0].split(/\s+/);  // cmd_args[0] = difficulty [1] = easy
+			    cmd_args.shift(); // drop difficulty switch
+				cmd_difficulty = cmd_args[0]; // get difficulty value
+				args.shift(); // args[0] = legality banned
+			    cmd_args = args[0].split(/\s+/);  // cmd_args[0] = legality [1] = banned
+			    cmd_args.shift(); // drop legality switch
+				cmd_legality = cmd_args[0]; // get legality value				
+			}
+
             else if (aid_command_name === 'trade') {
 				cmd_uwp = cmd_args[0]; // get uwp value
 			}
@@ -197,13 +219,11 @@ on('ready', () => {
 			let td_th_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nowrap;"';
 			let td_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nwrap;"';
 			let td_left_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:left;vertical-align:middle;word-break:normal;white-space:normal;"';
+			let center_style = ' style="border-color:#680100;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:3px 3px;text-align:center;vertical-align:middle;word-break:normal;white-space:nwrap;"';
 
          	// capture html for the banned items on this planet based on law level
  			let html = ""
 			
-
-			 
-
 			for (i = 0; i < law+1; i+=1) {
 				switch (i) {
 					case 0:
@@ -268,11 +288,12 @@ on('ready', () => {
 			html = html + '</td>' + '</tr> ';
 			let html_banned = html;
 			html = "";
+			let buyItemHTML = ""
+			let ItemDM = 0
 
 
 
-
-            if (aid_command_name === 'shop') {
+            if (aid_command_name === 'shop' || aid_command_name === 'buyItem' ) {
 
 				// tried to stretch output using display:table, block, inline-block, contents, flex, grid, inherit, initial
 				html = '<div style="width: 99%; border: 1px solid black; background-color: white; padding: 1px 1px; ">' +
@@ -377,6 +398,30 @@ on('ready', () => {
 						printed_DM_tl_n3 = 1;
 						item_tl_start = i.toString();
 					}
+
+// <hr style="border: 1px solid; margin: 1%;"></hr>
+
+                    // if using -- buyItem and you match the techlevel of the item, build the output html
+					if (i === parseInt(cmd_itemTL) ) {
+						buyItemHTML = '<div style="width: 99%; border: 1px solid black; align=center; background-color: white; padding: 1px 1px; ">' +
+						"<h3>ITEM ATTRIBUTES:</h3><b>TL:</b> " + cmd_itemTL +", <b>Difficulty:</b> " + cmd_difficulty + ", <b>Legality:</b> " + cmd_legality +"<br>";
+                        if (cmd_difficulty === 'Easy' && cmd_legality == 'Legal') { 
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_normal_market_non_military + ", (Normal Market: Crx1)"; 
+						}
+                        if (cmd_difficulty === 'Hard' && cmd_legality == 'Legal') { 
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_normal_market_military + ", (Normal Market: Crx1)";
+						}
+						if (cmd_difficulty === 'Easy' && cmd_legality == 'Banned') { 
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_black_market_non_military + ", (Black Market: Crx2)";
+						}
+						if (cmd_difficulty === 'Hard' && cmd_legality == 'Banned') { 
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_black_market_military + ", (Black Market Crx5)";
+						}
+						buyItemHTML = buyItemHTML + '</div>';
+					}
+	
+
+
 				} // end for
 				// print final shopping line after the loop exits
 				html = html +   "<tr>" +  
@@ -392,7 +437,10 @@ on('ready', () => {
 				'<td' + td_style + ' colspan="5"><span style="color:blue">After rolling, add DM+1/+2 if you pay 2x/3x</span></td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan="5">Use <u><i>Black Market</u></i> for illegal goods. Streetwise/Deception Effect < -1 attacts the Law </td>' + 
+				'<td' + td_style + ' colspan="5">Use <u><i>Black Market (DM+1)</u></i> for illegal goods. '+'If Streetwise/Deception Effect < -1 attacts the Law ' + 
+				'<span style="color:green;font-weight: bold;">Easy</span><br>Cr<span style="color:orange">x2</span>' +
+				'<span style="color:red;font-weight: bold;">Hard</span><br>Cr<span style="color:orange">x5</span></td>' +
+
 				'</tr> ' +
 				'<tr>' +
 				'<td' + td_left_style + ' colspan="5"><div style="text-align: center;"><b>Law Level [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
@@ -406,8 +454,13 @@ on('ready', () => {
 				'</tbody>' + 
 				'</table>' + 
 				'</div>';
-				sendChat("trav-aid shop", "\n"+html);
-			} // end if --shop
+				if (aid_command_name === 'shop' || aid_command_name === 'buyItem' ) {
+					sendChat("trav-aid shop", "\n"+html);
+				}
+				if (aid_command_name === 'buyItem' ) {
+					sendChat("trav-aid buyItem", "\n"+buyItemHTML);
+				}
+			} // end if --shop || --buyItem
 			if (aid_command_name === 'customs') {
 
 				// War, Strife, Disease… 	DM+1
