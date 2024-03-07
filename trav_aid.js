@@ -399,8 +399,6 @@ on('ready', () => {
 						item_tl_start = i.toString();
 					}
 
-// <hr style="border: 1px solid; margin: 1%;"></hr>
-
                     // if using -- buyItem and you match the techlevel of the item, build the output html
 					if (i === parseInt(cmd_itemTL) ) {
 						buyItemHTML = '<div style="width: 99%; border: 1px solid black; align=center; background-color: white; padding: 1px 1px; ">' +
