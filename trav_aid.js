@@ -284,7 +284,7 @@ on('ready', () => {
 						html = html + '<b>J+(18+)</b> Routine oppression<br>';  
 					} // end switch
 			} // end for i
-			html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor/Ammo not on the list above is available via <u><i>Normal Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> </div>' ;
+			html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons/Armor/Ammo not on the list above is available via <u><i>Normal Market:</u></i> <span style="color:red;font-weight: bold;">Hard (DM-2)</span> </div>' ;
 			html = html + '</td>' + '</tr> ';
 			let html_banned = html;
 			html = "";
@@ -300,14 +300,14 @@ on('ready', () => {
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan=3; ><b>Shopping in:</b> ' + cmd_name + "<br>UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
+						'<th' + th_style + ' colspan=2; ><b>Shopping in:</b> ' + cmd_name + "<br>UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
 					'</tr> ' +
 					'<tr>' +
-					'<td' + td_style + ' colspan=3; ><span style="color:blue">Hire a Shopper with Broker 0 for Cr200 or Streetwise 0 for Cr500</span></td>' + 
+					'<td' + td_style + ' colspan=2; ><span style="color:blue">Hire a Shopper with Broker 0 for Cr200 or Streetwise 0 for Cr500</span></td>' + 
 					'</tr> ' +
 					'<tr>' +
 						'<th' + th_style + ' >SHOP<br>DMs</th>' +
-						'<th' + th_style + ' colspan="2">Normal Market (Admin, Broker or Streetwise)</th>' +
+						'<th' + th_style + ' >Normal Market (Admin, Broker or Streetwise)</th>' +
 						// '<th' + th_style + ' colspan="2">Black Market<br>(Deception or Streetwise) </th>'+
 					'</tr>' +
 				'</thead>' +
@@ -315,7 +315,7 @@ on('ready', () => {
 					'<tr>' +
 						'<td' + td_th_style + ' >Item<br>TL</td>' +
 						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span><br>Crx1</td>' +
-						'<td' + td_th_style + ' ><span style="color:red;font-weight: bold;">Hard</span><br>Crx1</td>' +
+						// '<td' + td_th_style + ' ><span style="color:red;font-weight: bold;">Hard</span><br>Crx1</td>' +
 						// '<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span><br>Cr<span style="color:orange">x2</span></td>' +
 						// '<td' + td_th_style + ' ><span style="color:red;font-weight: bold;">Hard</span><br>Cr<span style="color:orange">x5</span></td>' +
 					    // '<td' + td_th_style + ' >Pro<br>Cr<span style="color:red">x20</span></td>' +
@@ -362,8 +362,8 @@ on('ready', () => {
 						if ( ! printed_DM_tl_0) {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >0-" + (i).toString() + "</td>" +
-							"<td" + td_style + " >" + DM_normal_market_non_military + "</td>"  + 
-							"<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
+							"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military + "</td>"  + 
+							// "<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_non_military  + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_military      + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_prohibited    + "</td>"  +
@@ -372,8 +372,8 @@ on('ready', () => {
 						else {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >" + item_tl_start + "-" + (i).toString() + "</td>" +
-							"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
-							"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
+							"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military      + "</td>"  + 
+							// "<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
 							// "<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
@@ -424,30 +424,30 @@ on('ready', () => {
 				// print final shopping line after the loop exits
 				html = html +   "<tr>" +  
 				"<td" + td_style + " >" + item_tl_start + "+"                + "</td>" +
-				"<td" + td_style + " >" + DM_normal_market_non_military      + "</td>"  + 
-				"<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
+				"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military      + "</td>"  + 
+				// "<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
 				// "<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
 				// "<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
 				//"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
 				"</tr>";
 				html = html +  
 				'<tr>' +
-				'<td' + td_style + ' colspan=3;  ><span style="color:blue">After rolling, add DM+1/+2 if you pay 2x/3x</span></td>' + 
+				'<td' + td_style + ' colspan=2;  ><span style="color:blue">After rolling, add DM+1/+2 if you pay 2x/3x</span></td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan=3;  >When using the <u><i>Black Market</u></i> take a DM+1 on your Deception or Streetwise roll.'+' If the Effect is < -1, you attact the Law. ' + 
+				'<td' + td_style + ' colspan=2;  >When using the <u><i>Black Market</u></i> take a DM+1 on your Deception or Streetwise roll.'+' If the Effect is < -1, you attact the Law. ' + 
 				'<span style="color:green;font-weight: bold;"> Easy </span> items cost Cr<span style="color:orange">x2 </span> and' +
-				'<span style="color:red;font-weight: bold;"> Hard </span>items cost Cr<span style="color:orange">x5</span></td>' +
+				'<span style="color:red;font-weight: bold;"> Hard (DM-2) </span>items cost Cr<span style="color:orange">x5</span></td>' +
 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_left_style + ' colspan=3;  ><div style="text-align: center;"><b>Law Level [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available as <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
+				'<td' + td_left_style + ' colspan=2;  ><div style="text-align: center;"><b>Law Level [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available as <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard (DM-2)</span> )</div><hr style="border: 1px solid; margin: 1%;">' ;
 				
 
 				html =  html + html_banned +
 				'<tr>' +
-				'<td' + td_style + ' colspan=1;  >Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + '  colspan=2; >Always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + '   >Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'<td' + td_style + ' width="66%"  >Always <span style="color:red;font-weight: bold;">Hard (DM-2)</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
@@ -512,7 +512,7 @@ on('ready', () => {
 						'<td' + td_left_style + ' ><b>Getting Caught:</b> Roll on Sentencing Table<br>2D - Advocate Effect + (Planet Law Level(<span style="color:red;font-weight: bold;">'+ law.toString() +'</span>) - Law Level when item first banned)</td>' +
 					'</tr>' + 
 					'<tr>' +
-					'<td' + td_left_style + '><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span> )</div><hr style="border: 1px solid; margin: 1%;">' +
+					'<td' + td_left_style + '><div style="text-align: center;"><b>Law Leved [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available via <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard (DM-2)</span> )</div><hr style="border: 1px solid; margin: 1%;">' +
 					html_banned +
 				'</table>' + 
 				'</div>';
