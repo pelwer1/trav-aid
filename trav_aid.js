@@ -449,8 +449,8 @@ on('ready', () => {
 
 				html =  html + html_banned +
 				'<tr>' +
-				'<td' + td_style + '   >Always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + ' width="66%"  >Always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + '   >Almost always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'<td' + td_style + ' width="66%"  >Almost always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
