@@ -308,17 +308,12 @@ on('ready', () => {
 					'<tr>' +
 						'<th' + th_style + ' >SHOP<br>DMs</th>' +
 						'<th' + th_style + ' >Normal Market (Admin, Broker or Streetwise)</th>' +
-						// '<th' + th_style + ' colspan="2">Black Market<br>(Deception or Streetwise) </th>'+
 					'</tr>' +
 				'</thead>' +
 				'<tbody>' +
 					'<tr>' +
 						'<td' + td_th_style + ' >Item<br>TL</td>' +
 						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span><br>Crx1</td>' +
-						// '<td' + td_th_style + ' ><span style="color:red;font-weight: bold;">Hard</span><br>Crx1</td>' +
-						// '<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span><br>Cr<span style="color:orange">x2</span></td>' +
-						// '<td' + td_th_style + ' ><span style="color:red;font-weight: bold;">Hard</span><br>Cr<span style="color:orange">x5</span></td>' +
-					    // '<td' + td_th_style + ' >Pro<br>Cr<span style="color:red">x20</span></td>' +
 					'</tr>';
 				// calculate the shopping DMs
 				let DM_gm_fiat  = -2;
@@ -327,11 +322,7 @@ on('ready', () => {
 				let DM_tl = 0;
 				let next_DM_tl = 0;
 				let i = 0;
-				let DM_normal_market_non_military =  0;
-				let DM_normal_market_military     =  0;
-				let DM_black_market_non_military  =  0;
-				let DM_black_market_military      =  0;
-				let DM_black_market_prohibited    =  0;
+				let DM_normal_market_easy =  0;
 				let printed_DM_tl_0 = 0;
 				let printed_DM_tl_n1 = 0;
 				let printed_DM_tl_n2 = 0;
@@ -351,32 +342,21 @@ on('ready', () => {
 					else if (next_tl_delta_item_world > 2){next_DM_tl = -2;} 
 					else if (next_tl_delta_item_world > 0){next_DM_tl = -1;} 
 					// market and item type          0       -2         -1       1        0   0(upto 12)   -1    // Fist: B789435-C  Ni Ht
-					DM_normal_market_non_military =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;            // Crx1
-					DM_normal_market_military     = -2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;            // Crx2
-					DM_black_market_non_military  =  2 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx2 
-					DM_black_market_military      =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx5
-					DM_black_market_prohibited    = -4 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl + DM_law ;  // Crx20
-					// log('-=> trav_aid shop: item TL:' + i + ' NM Civ Crx1:' + DM_normal_market_non_military + ' NM Mil Crx3:' + DM_normal_market_military + ' BM Civ Crx2:' +DM_black_market_non_military + ' BM Mil Crx5:' + DM_black_market_military +' BM Prohib Crx20:' + DM_black_market_prohibited + ' <=-');
+					DM_normal_market_easy =  0 + DM_gm_fiat + DM_pop + DM_stp + DM_tc + DM_tl;            // Crx1
 
 					if (DM_tl !== next_DM_tl) {
 						if ( ! printed_DM_tl_0) {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >0-" + (i).toString() + "</td>" +
-							"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military + "</td>"  + 
-							// "<td" + td_style + " >" + DM_normal_market_military     + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_non_military  + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_military      + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_prohibited    + "</td>"  +
+							"<td" + td_style + ' width="66%" >' + DM_normal_market_easy + "</td>"  + 
+
 							"</tr>";
 						}
 						else {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >" + item_tl_start + "-" + (i).toString() + "</td>" +
-							"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military      + "</td>"  + 
-							// "<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
-							// "<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+							"<td" + td_style + ' width="66%" >' + DM_normal_market_easy      + "</td>"  + 
+
 							"</tr>";
 						}
 					}
@@ -401,19 +381,24 @@ on('ready', () => {
 
                     // if using -- buyItem and you match the techlevel of the item, build the output html
 					if (i === parseInt(cmd_itemTL) ) {
+						let costDM = 0;
 						buyItemHTML = '<div style="width: 99%; border: 1px solid black; align=center; background-color: white; padding: 1px 1px; ">' +
 						"<h3>ITEM ATTRIBUTES:</h3><b>TL:</b> " + cmd_itemTL +", <b>Difficulty:</b> " + cmd_difficulty + ", <b>Legality:</b> " + cmd_legality +"<br>";
                         if (cmd_difficulty === 'Easy' && cmd_legality == 'Legal') { 
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_normal_market_non_military + ", (Normal Market: Crx1)"; 
+							costDM = DM_normal_market_easy;
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Normal Market: Crx1)"; 
 						}
                         if (cmd_difficulty === 'Hard' && cmd_legality == 'Legal') { 
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_normal_market_military + ", (Normal Market: Crx1)";
+							costDM = DM_normal_market_easy - 2;
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Normal Market: Crx1)";
 						}
 						if (cmd_difficulty === 'Easy' && cmd_legality == 'Banned') { 
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_black_market_non_military + ", (Black Market: Crx2)";
+							costDM = DM_normal_market_easy + 1;
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market: Crx2)";
 						}
 						if (cmd_difficulty === 'Hard' && cmd_legality == 'Banned') { 
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + DM_black_market_military + ", (Black Market Crx5)";
+							costDM = DM_normal_market_easy - 1;
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market Crx5)";
 						}
 						buyItemHTML = buyItemHTML + '</div>';
 					}
@@ -424,11 +409,7 @@ on('ready', () => {
 				// print final shopping line after the loop exits
 				html = html +   "<tr>" +  
 				"<td" + td_style + " >" + item_tl_start + "+"                + "</td>" +
-				"<td" + td_style + ' width="66%" >' + DM_normal_market_non_military      + "</td>"  + 
-				// "<td" + td_style + " >" + DM_normal_market_military          + "</td>"  +
-				// "<td" + td_style + " >" + DM_black_market_non_military       + "</td>"  +
-				// "<td" + td_style + " >" + DM_black_market_military           + "</td>"  +
-				//"<td" + td_style + " >" + DM_black_market_prohibited         + "</td>"  +
+				"<td" + td_style + ' width="66%" >' + DM_normal_market_easy      + "</td>"  + 
 				"</tr>";
 				html = html +  
 				'<tr>' +
