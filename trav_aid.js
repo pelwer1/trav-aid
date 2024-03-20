@@ -86,6 +86,10 @@ on('ready', () => {
 			// !trav-aid --buyItem --uwp B789430-C --itemTL 0-15 --difficulty easy|hard --legality legal|banned
             else if (aid_command_name === 'buyItem') {
 				cmd_uwp = cmd_args[0]; // get uwp value
+				args.shift(); // drop command name: args[0] = name pandora
+			    cmd_args = args[0].split(/\s+/);
+			    cmd_args.shift(); // drop name switch
+				cmd_name = cmd_args[0]; // get name value
 				args.shift(); // args[0] = itemTL 10
 			    cmd_args = args[0].split(/\s+/);  // cmd_args[0] = itemTL [1] = 10
 			    cmd_args.shift(); // drop itemTL switch
@@ -383,7 +387,7 @@ on('ready', () => {
 					if (i === parseInt(cmd_itemTL) ) {
 						let costDM = 0;
 						buyItemHTML = '<div style="width: 99%; border: 1px solid black; align=center; background-color: white; padding: 1px 1px; ">' +
-						"<h3>ITEM ATTRIBUTES:</h3><b>TL:</b> " + cmd_itemTL +", <b>Difficulty:</b> " + cmd_difficulty + ", <b>Legality:</b> " + cmd_legality +"<br>";
+						"<h3>" + cmd_name + " - ITEM ATTRIBUTES:</h3><b>TL:</b> " + cmd_itemTL +", <b>Difficulty:</b> " + cmd_difficulty + ", <b>Legality:</b> " + cmd_legality +"<br>";
                         if (cmd_difficulty === 'Easy' && cmd_legality == 'Legal') { 
 							costDM = DM_normal_market_easy;
 							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Normal Market: Crx1)"; 
