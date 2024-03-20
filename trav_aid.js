@@ -300,20 +300,20 @@ on('ready', () => {
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan=2; ><b>Shopping in:</b> ' + cmd_name + "<br>UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
+						'<th' + th_style + ' colspan=2; ><b>Shopping in:</b> ' + cmd_name + ", UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
 					'</tr> ' +
 					'<tr>' +
 					'<td' + td_style + ' colspan=2; ><span style="color:blue">Hire a Shopper with Broker 0 for Cr200 or Streetwise 0 for Cr500</span></td>' + 
 					'</tr> ' +
 					'<tr>' +
-						'<th' + th_style + ' >SHOP<br>DMs</th>' +
+						'<th' + th_style + ' >SHOP DMs</th>' +
 						'<th' + th_style + ' >Normal Market (Admin, Broker or Streetwise)</th>' +
 					'</tr>' +
 				'</thead>' +
 				'<tbody>' +
 					'<tr>' +
-						'<td' + td_th_style + ' >Item<br>TL</td>' +
-						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span><br>Crx1</td>' +
+						'<td' + td_th_style + ' >Item TL</td>' +
+						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span>to Acquire (Crx1)</td>' +
 					'</tr>';
 				// calculate the shopping DMs
 				let DM_gm_fiat  = -2;
@@ -348,14 +348,14 @@ on('ready', () => {
 						if ( ! printed_DM_tl_0) {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >0-" + (i).toString() + "</td>" +
-							"<td" + td_style + ' width="66%" >' + DM_normal_market_easy + "</td>"  + 
+							"<td" + td_style + ' >' + DM_normal_market_easy + "</td>"  + 
 
 							"</tr>";
 						}
 						else {
 							html = html +   "<tr>" +  
 							"<td" + td_style + " >" + item_tl_start + "-" + (i).toString() + "</td>" +
-							"<td" + td_style + ' width="66%" >' + DM_normal_market_easy      + "</td>"  + 
+							"<td" + td_style + '  >' + DM_normal_market_easy      + "</td>"  + 
 
 							"</tr>";
 						}
@@ -405,20 +405,20 @@ on('ready', () => {
 	
 
 
-				} // end for
+				} // end for TL loop
 				// print final shopping line after the loop exits
 				html = html +   "<tr>" +  
 				"<td" + td_style + " >" + item_tl_start + "+"                + "</td>" +
-				"<td" + td_style + ' width="66%" >' + DM_normal_market_easy      + "</td>"  + 
+				"<td" + td_style + '  >' + DM_normal_market_easy      + "</td>"  + 
 				"</tr>";
 				html = html +  
 				'<tr>' +
 				'<td' + td_style + ' colspan=2;  ><span style="color:blue;font-weight: bold;">--- Additional DMs ---<br></span>'+
-				'<i><u>Black Market:</u></i> DM+1 ($$$ and risky)<br><span style="color:red;font-weight: bold;">' + 
-				'Hard:</span> DM-2<br><b>Pay 2x/3x:</b> DM+1/+2 (after rolling)</td>' + 
+				'<i><u>Black Market:</u></i> DM+1 ($$$ and risky);  <span style="color:red;font-weight: bold;">' + 
+				'Hard:</span> to Acquire: DM-2<br><b>Pay 2x/3x:</b> DM+1/+2 (after rolling)</td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan=2;  ><u><i>The Black Market</u></i><br>Skills: Deception or Streetwise<br>'+
+				'<td' + td_style + ' colspan=2;  ><u><i>The Black Market</u></i><br>Skills: Deception or Streetwise '+
 				'(On Effect-2 or less you Attact the Law)<br>Cost Markups: ' + 
 				'<span style="color:green;font-weight: bold;"> Easy: </span> <span style="color:orange">Crx2 </span>; ' +
 				'<span style="color:red;font-weight: bold;"> Hard: </span> <span style="color:orange">Crx5</span></td>' +
@@ -431,13 +431,38 @@ on('ready', () => {
 				html =  html + html_banned +
 				'<tr>' +
 				'<td' + td_style + '   >Almost always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + ' width="66%"  >Almost always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + '  >Almost always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
 				'</div>';
 				if (aid_command_name === 'shop' || aid_command_name === 'buyItem' ) {
-					sendChat("trav-aid shop", "\n"+html);
+					// sendChat("trav-aid shop", "\n"+html);
+
+					// make sure handout doesn't aready exist before creating it
+					let handoutExists = 0;
+					var currentHandouts = findObjs({                              
+						_type: "handout",                          
+						name: 'Shopping in ' + cmd_name,
+					});
+					_.each(currentHandouts, function(obj) {    
+						sendChat("trav-aid shop",'Shopping Handout for '+ cmd_name+ ' already exists!');
+						sendChat("trav-aid shop",'Click [HERE](http://journal.roll20.net/handout/' + obj.id +') for ' + cmd_name + ' Shopping Table');
+						handoutExists = 1;
+					});
+
+					//Create a new Handout available to all players
+					if (handoutExists === 0) {
+						var handout = createObj("handout", {
+							name: 'Shopping in ' + cmd_name,
+							inplayerjournals: "all",
+							archived: false
+						});
+						handout.set('notes', "\n"+html);
+						sendChat("trav-aid shop",'Click [HERE](http://journal.roll20.net/handout/' + handout.id +') for ' + cmd_name + ' Shopping Table');
+					}
+
+
 				}
 				if (aid_command_name === 'buyItem' ) {
 					sendChat("trav-aid buyItem", "\n"+buyItemHTML);
