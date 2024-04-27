@@ -234,16 +234,21 @@ on('ready', () => {
 						html = html + '<b>0</b> No restrictions, heavy armor and weapons recommended<br>'; 
 						break;
 					case 1:
-						html = html + '<b>1</b> <u>Weapons:</u> Poison gas, explosives and grenades, undetectable weapons, WMD; <u>Armor:</u> Battle Dress<br>';
+						html = html + '<b>1</b> <u>Weapons:</u> Poison gas, explosives and grenades,'+
+						' undetectable weapons, WMDs; <u>Armor:</u> Battle Dress<br>';
 						break;
 					case 2:
-						html = html + '<b>2</b> <u>Weapons:</u> Portable energy and laser weapons; <u>Armor:</u> Combat Armor; <u>Medicinal Drugs:</u> Anagathic, Recreational<br>';
+						html = html + '<b>2</b> <u>Weapons:</u> Portable energy and laser weapons;'+
+						' <u>Armor:</u> Combat Armor; <u>Medicinal Drugs:</u> Anagathic, Recreational<br>';
 						break;
 					case 3:
 						html = html + '<b>3</b> <u>Weapons:</u> Gauss weapons, advanced combat rifles, portable heavy weapons, any weapon with Destructive trait; <u>Armor:</u> Flak and Obvious Armor<br>';
 						break;
 					case 4:
-						html = html + '<b>4</b> <u>Weapons:</u> Autorifles, assault weapons, submachine guns, specialised ammunition, any weapon with Auto trait; <u>Armor:</u> Cloth Armor; <u>Combat Drugs:</u> Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, Nervous Dampener, Psi<br>';
+						html = html + '<b>4</b> <u>Weapons:</u> Auto-rifles, assault weapons, submachine guns,'+
+						' specialized ammunition, any weapon with Auto trait; <u>Armor:</u> Cloth Armor;'+
+						' <u>Combat Drugs:</u> Adrenaliser, Combat, Meta-Performance, Meta-Accelerator, '+
+						'Nervous Dampener, Psi Drugs<br>';
 						break;
 					case 5:
 						html = html + '<b>5</b> <u>Weapons:</u> Personal concealable ranged weapons, small arms, pistols, revolvers, semi-automatic rifles; <u>Armor:</u> Mesh Armor<br>';
@@ -288,7 +293,9 @@ on('ready', () => {
 						html = html + '<b>J+(18+)</b> Routine oppression<br>';  
 					} // end switch
 			} // end for i
-			html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">Any Weapons, Armor, Ammo, or Combat Drugs not listed above are available as <u><i>Normal Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span></div>' ;
+			// html = html + '<hr style="border: 1px solid; margin: 1%;"><div style="text-align: center;">'+
+			// 'Any Weapons, Armor, Ammo, or Combat Drugs not listed above are available as <u><i>Normal Market:</u></i>'+
+			// ' <span style="color:red;font-weight: bold;">Hard</span></div>' ;
 			html = html + '</td>' + '</tr> ';
 			let html_banned = html;
 			html = "";
@@ -317,7 +324,7 @@ on('ready', () => {
 				'<tbody>' +
 					'<tr>' +
 						'<td' + td_th_style + ' >Item TL</td>' +
-						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span>to Acquire (Crx1)</td>' +
+						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy(DM+0,Crx1)</span> to Acquire</td>' +
 					'</tr>';
 				// calculate the shopping DMs
 				let DM_gm_fiat  = -2;
@@ -417,31 +424,41 @@ on('ready', () => {
 				"</tr>";
 				html = html +  
 				'<tr>' +
-				'<td' + td_style + ' colspan=2;  ><span style="color:blue;font-weight: bold;">--- Additional DMs ---<br></span>'+
-				'<i><u>Black Market:</u></i> DM+1 ($$$ and risky);  <span style="color:red;font-weight: bold;">' + 
-				'Hard:</span> to Acquire: DM-2<br><b>Pay 2x/3x:</b> DM+1/+2 (after rolling)</td>' + 
+				'<td' + td_style + ' colspan=2;  >'+
+				'<span style="color:blue;font-weight: bold;">--- Additional DMs ---<br></span>'+
+				'<span style="color:red;font-weight: bold;">Hard(DM-2,Crx1)</span> to Acquire<br>'+
+				'<b>Use a Full Week:</b> DM+2 (before rolling)<br>' + 
+				'<b>Pay 2x/3x More:</b> DM+1/+2 (after rolling)</td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan=2;  ><u><i>The Black Market</u></i><br>Skills: Deception or Streetwise '+
-				'(On Effect-2 or less you Attact the Law)<br>Cost Markups: ' + 
-				'<span style="color:green;font-weight: bold;"> Easy: </span> <span style="color:orange">Crx2 </span>; ' +
-				'<span style="color:red;font-weight: bold;"> Hard: </span> <span style="color:orange">Crx5</span></td>' +
+				'<td' + td_style + ' colspan=2;  ><b>--- The Black Market: DM+1 (expensive and risky) ---</b><br>'+
+				'<u>Skills:</u> Deception or Streetwise '+
+				'(On Effect-2 or less you Attract the Law)<br>Banned or Illegal goods may be purchased. <br>'+
+				'<u>Cost Markups:</u> ' + 
+				'<span style="color:green;font-weight: bold;"> Easy(DM+0,Crx2) </span> ' +
+				'<span style="color:red;font-weight: bold;"> Hard(DM-2,Crx5) </span></td>' +
 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_left_style + ' colspan=2;  ><div style="text-align: center;"><b>Law Level [' + law.toString() + '] Banned (Cumulative):</b><br>(Only available as <u><i>Black Market:</u></i> <span style="color:red;font-weight: bold;">Hard</span>)</div><hr style="border: 1px solid; margin: 1%;">' ;
+				'<td' + td_left_style + ' colspan=2;  ><div style="text-align: center;"><b>Law Level [' + law.toString() + 
+				'] Banned or Illegal Items (Cumulative):</b></div>'; // <hr style="border: 1px solid; margin: 1%;">' ;
 				
 
 				html =  html + html_banned +
 				'<tr>' +
-				'<td' + td_style + '   >Almost always <span style="color:green;font-weight: bold;">Easy</span> to acquire: Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
-				'<td' + td_style + '  >Almost always <span style="color:red;font-weight: bold;">Hard</span> to acquire: Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Weapons (Any Type), Weapon Mods</td>' + 
+				'<td' + td_style + '><b>Almost always <span style="color:green;font-weight: bold;">'+
+				'Easy(DM+0, Crx1 or 2 )</span> to acquire:</b>'+
+				' Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'<td' + td_style + '><b>Almost always <span style="color:red;font-weight: bold;">'+
+				'Hard(DM-2,Crx1 or 5)</span> to acquire:</b>'+
+				' Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Vehicles, '+
+				'Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
 				'</div>';
 				if (aid_command_name === 'shop' || aid_command_name === 'buyItem' ) {
-					// sendChat("trav-aid shop", "\n"+html);
+					sendChat("trav-aid shop", "\n"+html);
 
 					// make sure handout doesn't aready exist before creating it
 					let handoutExists = 0;
