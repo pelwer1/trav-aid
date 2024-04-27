@@ -311,10 +311,12 @@ on('ready', () => {
 				'<table style="border-collapse:collapse;border-spacing:0; width: 100%; " >' +
 				'<thead>' +
 					'<tr>' +
-						'<th' + th_style + ' colspan=2; ><b>Shopping in:</b> ' + cmd_name + ", UWP: " + cmd_uwp  + ' (3 Rolls) </th>' + 
+						'<th' + th_style + ' colspan=2; ><b>Shopping in:</b> ' + cmd_name + ", UWP: " + cmd_uwp  + 
+						' (3 Rolls) </th>' + 
 					'</tr> ' +
 					'<tr>' +
-					'<td' + td_style + ' colspan=2; ><span style="color:blue">Hire a Shopper with Broker 0 for Cr200 or Streetwise 0 for Cr500</span></td>' + 
+					'<td' + td_style + ' colspan=2; ><span style="color:blue">Hire a Shopper with Broker 0 for Cr200'+
+					' or Streetwise 0 for Cr500</span></td>' + 
 					'</tr> ' +
 					'<tr>' +
 						'<th' + th_style + ' >SHOP DMs</th>' +
@@ -324,7 +326,8 @@ on('ready', () => {
 				'<tbody>' +
 					'<tr>' +
 						'<td' + td_th_style + ' >Item TL</td>' +
-						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy(DM+0,Crx1)</span> to Acquire</td>' +
+						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy(DM+0,Crx1)</span>'+
+						' to Acquire</td>' +
 					'</tr>';
 				// calculate the shopping DMs
 				let DM_gm_fiat  = -2;
