@@ -458,7 +458,7 @@ on('ready', () => {
 				'</table>' + 
 				'</div>';
 				if (aid_command_name === 'shop' || aid_command_name === 'buyItem' ) {
-					sendChat("trav-aid shop", "\n"+html);
+					// sendChat("trav-aid shop", "\n"+html);
 
 					// make sure handout doesn't aready exist before creating it
 					let handoutExists = 0;
