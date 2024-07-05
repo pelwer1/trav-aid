@@ -536,7 +536,7 @@ on('ready', () => {
 						'<td' + th_gray_style + ' >The Travellers</td>'+
 					'</tr>' +
 					'<tr>' +
-						'<td' + td_left_style + ' ><b>Avoid Detection or Trouble</b> with<br>Persuade(INT) or<br>Stealth(DEX) or Streetwise(INT)<br>check with <span style="color:red;font-weight:bold;">DM' + DM_customs_tl.toString() + '</span></td>' +
+						'<td' + td_left_style + ' ><b>Avoid Detection or Trouble:</b>  <span style="color:red;font-weight:bold;">DM' + DM_customs_tl.toString() + '</span></td>' +
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_left_style + ' >[Open Customs Smuggling DMs Handout](http://journal.roll20.net/handout/-O0vsqC28SMe3hyB3Bhd) </td>' +
