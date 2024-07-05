@@ -539,7 +539,7 @@ on('ready', () => {
 						'<td' + td_left_style + ' ><b>Avoid Detection or Trouble</b> with<br>Persuade(INT) or<br>Stealth(DEX) or Streetwise(INT)<br>check with <span style="color:red;font-weight:bold;">DM' + DM_customs_tl.toString() + '</span></td>' +
 					'</tr>' +
 					'<tr>' +
-						'<td' + td_left_style + ' >[Open Customs Smuggling DMs Handout](http://journal.roll20.net/handout/-O0vsqC28SMe3hyB3Bhd) <br> Stealth Weapon DM+TL/2;<br>Disguised or Disassembled DM+2<br>Concealed or Hidden DM+2<br>Knife Sized DM+1 <br>Pistol/Handgun Sized DM-2<br>Long Gun Sized DM-4</td>' +
+						'<td' + td_left_style + ' >[Open Customs Smuggling DMs Handout](http://journal.roll20.net/handout/-O0vsqC28SMe3hyB3Bhd) </td>' +
 					'</tr>' +
 					'<tr>' +
 						'<td' + td_left_style + ' ><b>Getting Caught:</b> Roll on Sentencing Table<br>2D - Advocate Effect + (Planet Law Level(<span style="color:red;font-weight: bold;">'+ law.toString() +'</span>) - Law Level when item first banned)</td>' +
