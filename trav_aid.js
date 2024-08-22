@@ -454,7 +454,7 @@ on('ready', () => {
 				' Tools, Computers, Software, Drugs(Medicinal), Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
 				'<td' + td_style + '><b>Almost always <span style="color:red;font-weight: bold;">'+
 				'Hard(DM-2,Crx1 or 5)</span> to acquire:</b>'+
-				' Armor, Armor Mods, Augments, Drugs(Combat), Explosives, Grenades, Robots, Shields, Special Ammo, Vehicles, '+
+				' Armor, Armor Mods, Augments, Drugs(Combat, PSI), Explosives, Grenades, Robots, Shields, Special Ammo, Vehicles, '+
 				'Weapons (Any Type), Weapon Mods</td>' + 
 				'</tr> ' +
 				'</tbody>' + 
