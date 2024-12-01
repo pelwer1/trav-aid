@@ -262,7 +262,7 @@ on('ready', () => {
 						html = html + '<b>8</b> <u>Weapons:</u> All blades, batons, archaic and stunners; <u>Armor:</u> All visible armor; <u>Drugs:</u> G-Tol, Anti-Rad, Medicinal, Panacea, Rad Emergency; <u>PSI:</u> All Psi-Tech<br>';
 						break;
 					case 9:
-						html = html + '<b>9</b> <u>Weapons:</u> All;  <u>Armor:</u> All; <u>Drugs:</u> All; <u>PSI:</u>All Psions<br>'; 
+						html = html + '<b>9</b> <u>Weapons:</u> All;  <u>Armor:</u> All; <u>Drugs:</u> All; <u>PSI:</u> All Psions<br>'; 
 						break;
 					case 10:
 						html = html + '<b>A(10)</b> All violations are serious crimes<br>';
