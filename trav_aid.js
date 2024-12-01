@@ -428,7 +428,7 @@ on('ready', () => {
 				'<tr>' +
 				'<td' + td_style + ' colspan=2;  >'+
 				'<span style="color:blue;font-weight: bold;">--- Additional DMs (Any Market) ---<br></span>'+
-				'<span style="color:red;font-weight: bold;">Hard</span> to Acquire: DM-2<br>'+
+				'<span style="color:red;font-weight: bold;">Hard</span> to Acquire: DM-2 (before rolling)<br>'+
 				'<b>Use a Full Week:</b> DM+2 (before rolling)<br>' + 
 				'<b>Pay 2x/3x More:</b> DM+1/+2 (after rolling)</td>' + 
 				'</tr> ' +
