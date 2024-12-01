@@ -325,7 +325,7 @@ on('ready', () => {
 				'<tbody>' +
 					'<tr>' +
 						'<td' + td_th_style + ' >Item TL</td>' +
-						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy(DM+0,Crx1)</span>'+
+						'<td' + td_th_style + ' ><span style="color:green;font-weight: bold;">Easy</span>'+
 						' to Acquire</td>' +
 					'</tr>';
 				// calculate the shopping DMs
@@ -407,11 +407,11 @@ on('ready', () => {
 						}
 						if (cmd_difficulty === 'Easy' && cmd_legality == 'Banned') { 
 							costDM = DM_normal_market_easy + 1;
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market: Crx2)";
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market: Crx10)";
 						}
 						if (cmd_difficulty === 'Hard' && cmd_legality == 'Banned') { 
 							costDM = DM_normal_market_easy - 1;
-							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market Crx5)";
+							buyItemHTML = buyItemHTML + "<b>Shopping DM:</b> " + costDM + ", (Black Market Crx10)";
 						}
 						buyItemHTML = buyItemHTML + '</div>';
 					}
