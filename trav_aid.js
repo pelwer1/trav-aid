@@ -427,19 +427,15 @@ on('ready', () => {
 				html = html +  
 				'<tr>' +
 				'<td' + td_style + ' colspan=2;  >'+
-				'<span style="color:blue;font-weight: bold;">--- Additional DMs ---<br></span>'+
-				'<span style="color:red;font-weight: bold;">Hard(DM-2,Crx1)</span> to Acquire<br>'+
+				'<span style="color:blue;font-weight: bold;">--- Additional DMs (Any Market) ---<br></span>'+
+				'<span style="color:red;font-weight: bold;">Hard</span> to Acquire: DM-2<br>'+
 				'<b>Use a Full Week:</b> DM+2 (before rolling)<br>' + 
 				'<b>Pay 2x/3x More:</b> DM+1/+2 (after rolling)</td>' + 
 				'</tr> ' +
 				'<tr>' +
-				'<td' + td_style + ' colspan=2;  ><b>--- The Black Market: DM+1 (expensive and risky) ---</b><br>'+
+				'<td' + td_style + ' colspan=2;  ><b>--- The Black Market: (expensive and risky) ---</b><br>'+
 				'<u>Skills:</u> Deception or Streetwise '+
-				'(On Effect-2 or less you Attract the Law)<br>Banned or Illegal goods may be purchased. <br>'+
-				'<u>Cost Markups:</u> ' + 
-				'<span style="color:green;font-weight: bold;"> Easy(DM+0,Crx2) </span> ' +
-				'<span style="color:red;font-weight: bold;"> Hard(DM-2,Crx5) </span></td>' +
-
+				'(On Effect-2 or less you Attract the Law)<br>Banned or Illegal goods may be purchased for <b>Crx10</b>. <br>'+
 				'</tr> ' +
 				'<tr>' +
 				'<td' + td_left_style + ' colspan=2;  ><div style="text-align: center;"><b>Law Level [' + law.toString() + 
@@ -449,9 +445,9 @@ on('ready', () => {
 				html =  html + html_banned +
 				'<tr>' +
 				'<td' + td_style + '><b><span style="color:green;font-weight: bold;">'+
-				'Easy</span>:</b> Tools, Computers, Normal Software, Drugs(Medicinal), Civilian Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
+				'Easy (DM+0)</span>:</b> Tools, Computers, Normal Software, Drugs(Medicinal), Civilian Electronics, Medical Gear, Standard Ammo, Survival Gear</td>' + 
 				'<td' + td_style + '><b><span style="color:red;font-weight: bold;">'+
-				'Hard</span>:</b> Armor, Armor Mods, Augments, Drugs(Combat, PSI), Military Gear, Explosives, Grenades, Robots, Shields, Special Ammo, Vehicles, Weapons (Any Type), Weapon Mods, Security/Intrusion HW/SW </td>' + 
+				'Hard (DM-2)</span>:</b> Armor, Armor Mods, Augments, Drugs(Combat, PSI), Military Gear, Explosives, Grenades, Robots, Shields, Special Ammo, Vehicles, Weapons (Any Type), Weapon Mods, Security/Intrusion HW/SW </td>' + 
 				'</tr> ' +
 				'</tbody>' + 
 				'</table>' + 
