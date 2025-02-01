@@ -5,16 +5,16 @@ Roll20 Mod to determine availability DMs, customs DMs, and tradecodes based on p
 
 Show Shopping DM's for a world
 
-* !trav-aid --shop    --uwp B789430-C
+* !trav-aid --shop    --uwp B789430-C --name sysstemName
 
 Show Customs Targets and DMs for being boarded and smuggling gear thru a checkpoint
 
-* !trav-aid --customs --uwp B789430-C --bases [code|0] --zone [G|A|R]
+* !trav-aid --customs --uwp B789430-C --bases [code|0] --zone [G|A|R] --name sysstemName
 
 Show the Trade Codes for a given UWP - good for roll20 Trade tab in character sheet
 
-* !trav-aid --trade   --uwp B789430-C
+* !trav-aid --trade   --uwp B789430-C --name sysstemName
 
 Show the roll required to buy a single item on a planet
 
-* !trav-aid --buyItem --uwp B789430-C --itemTL 0-15 --difficulty easy|hard  --legality legal|banned
+* !trav-aid --buyItem --uwp B789430-C --itemTL 0-15 --difficulty easy|hard  --legality legal|banned --name sysstemName
